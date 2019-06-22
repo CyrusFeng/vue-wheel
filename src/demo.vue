@@ -94,10 +94,13 @@
     methods: {
       ajax(parentId = 0) {
         return new Promise((resolve, reject) => {
+
+          //模拟ajax请求
           setTimeout(() => {
             let result = db.filter((item) => item.parentId === parentId)
             resolve(result)
           }, 1000)
+
         })
       },
       loadData(lastItem,callback){

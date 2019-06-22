@@ -2,7 +2,7 @@
     <div>
         <div class="input-wrap">
             <input type="text" :value="result">
-            <i class="icon"></i>
+            <c-icon class="icon" name="cancel" @click="cancel"></c-icon>
         </div>
         <div class="popover">
             <g-cascader-item :load-data="loadData"
@@ -17,11 +17,13 @@
 
 <script>
   import Item from './g-cascader-item'
+  import CIcon from './c-icon'
 
   export default {
     name: "g-cascader",
     components: {
-      "g-cascader-item": Item
+      "g-cascader-item": Item,
+      'c-icon':CIcon
     },
     props: {
       completeSource: {
@@ -37,23 +39,36 @@
         level: 0
       }
     },
-    computed:{
-      result(){
-        return this.selectedData.map((item)=>{
+    computed: {
+      result() {
+        return this.selectedData.map((item) => {
           return item.name
         }).join('-')
       }
     },
-    methods: {},
+    methods: {
+      cancel(){
+        this.selectedData = []
+      }
+    },
     created() {
 
     }
   }
 </script>
 
-<style scoped>
-input{
-    padding: 0.1rem;
-    font-size: 0.12rem;
-}
+<style scoped lang="scss">
+    @import "../style_var.scss";
+    .input-wrap{
+        display: inline-flex;
+        align-items: center;
+        min-width: 10em;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        input {
+            padding: 0.1rem;
+            font-size: 0.12rem;
+        }
+    }
+
 </style>

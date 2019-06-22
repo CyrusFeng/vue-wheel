@@ -5,7 +5,12 @@
             <ul>
                 <li v-for="item in source" @click="choose(item)">
                     <span>{{item.name}}</span>
-                    <i class="icon"></i>
+                    <template v-if="loadingItem.id === item.id">
+                        <c-icon name="loading" v-if="!item.isLeaf" class="icon loading"></c-icon>
+                    </template>
+                    <template v-else>
+                        <c-icon name="right" v-if="!item.isLeaf" class="icon"></c-icon>
+                    </template>
                 </li>
             </ul>
         </div>
@@ -20,8 +25,12 @@
 </template>
 
 <script>
+    import CIcon from './c-icon'
   export default {
     name: "g-cascader-item",
+    components:{
+      'c-icon':CIcon
+    },
     props: {
       source: {
         type: Array
@@ -36,6 +45,12 @@
         type: Function
       }
     },
+    data(){
+      return {
+        loadingItem:{},
+        timer:null
+      }
+    },
     methods: {
       choose(item) {
         let copy = JSON.parse(JSON.stringify(this.selectedData))
@@ -45,12 +60,21 @@
         copy.splice(this.level + 1)
 
         let callback = (result) => {
+          //数据加载完成后会调用该回调函数 此时清空loadingItem
+          this.loadingItem = {}
           this.$set(copy[copy.length - 1], 'children', result)
         }
         //最后一项非叶子节点且没有children属性时才会执行loaddata
         if (!copy[copy.length - 1].isLeaf && !copy[copy.length - 1].children) {
           if(this.loadData){
-            this.loadData(copy[copy.length - 1], callback)
+            //将被点击的item赋值给loadingItem
+            this.loadingItem = copy[copy.length - 1]
+            //函数防抖
+            clearTimeout(this.timer)
+            this.timer = setTimeout(() => {
+              this.loadData(copy[copy.length - 1], callback)
+            }, 1000)
+
           }
         }
 
@@ -64,10 +88,48 @@
   }
 </script>
 
-<style scoped>
-.item-wrap{
+<style scoped lang="scss">
+    @import "../style_var.scss";
+
+    .item-wrap{
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    /*height: 100%;*/
+    height: 200px;
+    .left{
+        height: 100%;
+        padding: 0.3em 0;
+        overflow: auto;
+        li{
+            padding: .5em 1em;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            white-space: nowrap;
+            &:hover {
+                background: $grey;
+            }
+            span{
+                padding: 0.3em 1em;
+                display: flex;
+                align-items: center;
+                min-width: 5em;
+                margin-right: 1em;
+                user-select: none;
+            }
+            .icon{
+                margin-left: 1em;
+                &.loading{
+                    animation: spin 1s infinite linear;
+                }
+            }
+        }
+
+    }
+    .right{
+        height: 100%;
+        border-left: 1px solid $border-color-light;
+    }
 }
 </style>
