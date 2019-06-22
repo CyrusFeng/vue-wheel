@@ -5,7 +5,8 @@
             <ul>
                 <li v-for="item in source" @click="choose(item)">
                     <span>{{item.name}}</span>
-                    <template v-if="loadingItem.id === item.id">
+                    <!--直接传入完整数据，数据项无id 所以要在id存在的情况下才显示loading效果-->
+                    <template v-if="item.id && loadingItem.id === item.id">
                         <c-icon name="loading" v-if="!item.isLeaf" class="icon loading"></c-icon>
                     </template>
                     <template v-else>
