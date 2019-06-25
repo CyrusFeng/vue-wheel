@@ -6,11 +6,11 @@
                 <li v-for="item in source" @click="choose(item)">
                     <span>{{item.name}}</span>
                     <!--直接传入完整数据，数据项无id 所以要在id存在的情况下才显示loading效果-->
-                    <template v-if="item.id && loadingItem.id === item.id">
+                    <template v-if="item.id && loadingItem.id === item.id && item.isLeaf===false">
                         <c-icon name="loading" v-if="!item.isLeaf" class="icon loading"></c-icon>
                     </template>
                     <template v-else>
-                        <c-icon name="right" v-if="!item.isLeaf" class="icon"></c-icon>
+                        <c-icon name="right" v-if="item.isLeaf===false || (item.children && item.children.length>0)" class="icon"></c-icon>
                     </template>
                 </li>
             </ul>

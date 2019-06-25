@@ -192,13 +192,14 @@ const arr = [
     "id": 40,
     "name": "朝阳",
     "parentId": 1,
-    "isLeaf":true
+    "isLeaf":false
   },
 
   {
     "id": 400,
     "name": "朝阳弟弟",
-    "parentId": 40
+    "parentId": 40,
+    "isLeaf":true
   },
 
   {

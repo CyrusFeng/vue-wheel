@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Item from './g-cascader-item'
+  import Item from './c-cascader-item'
   import CIcon from './c-icon'
 
   export default {

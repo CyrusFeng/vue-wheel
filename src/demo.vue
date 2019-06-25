@@ -3,13 +3,20 @@
         <c-icon name="loading"></c-icon>
         <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
         <c-cascader :complete-source="source"></c-cascader>
+        <c-slides>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </c-slides>
     </div>
 </template>
 
 <script>
-  import Icon from './components/c-icon'
-  import CCascader from './components/g-cascader'
+  import CIcon from './components/c-icon'
+  import CCascader from './components/c-cascader'
   import db from '../tests/fixtrues/region'
+
+  import CSlides from './components/c-slides'
 
   var source = [
     {
@@ -77,8 +84,9 @@
   export default {
     name: "demo",
     components: {
-      'c-icon': Icon,
-      'c-cascader':CCascader
+      'c-icon': CIcon,
+      'c-cascader':CCascader,
+      'c-slides':CSlides
     },
     data() {
       return {
