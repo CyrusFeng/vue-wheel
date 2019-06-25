@@ -9,7 +9,7 @@
 <script>
   import Icon from './components/c-icon'
   import CCascader from './components/g-cascader'
-  import db from './region'
+  import db from '../tests/fixtrues/region'
 
   var source = [
     {
