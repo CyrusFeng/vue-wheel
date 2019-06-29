@@ -3,10 +3,16 @@
         <c-icon name="loading"></c-icon>
         <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
         <c-cascader :complete-source="source"></c-cascader>
-        <c-slides>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
+        <c-slides :selected.sync="selected" :reserve="reserve">
+            <c-slides-item name="1">
+                <div class="box">1</div>
+            </c-slides-item>
+            <c-slides-item name="2">
+                <div class="box">2</div>
+            </c-slides-item>
+            <c-slides-item name="3">
+                <div class="box">3</div>
+            </c-slides-item>
         </c-slides>
     </div>
 </template>
@@ -17,6 +23,8 @@
   import db from '../tests/fixtrues/region'
 
   import CSlides from './components/c-slides'
+  import CSlidesItem from './components/c-slides-item'
+
 
   var source = [
     {
@@ -86,12 +94,15 @@
     components: {
       'c-icon': CIcon,
       'c-cascader':CCascader,
-      'c-slides':CSlides
+      'c-slides':CSlides,
+      'c-slides-item':CSlidesItem
     },
     data() {
       return {
         completeSource: [],
-        source
+        source,
+        selected:'1',
+        reserve:false
       }
     },
     created() {
@@ -122,5 +133,13 @@
 <style scoped>
     *{
         font-size: 16px;
+    }
+    .box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height:300px;
+        background-color: #666666;
     }
 </style>
