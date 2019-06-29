@@ -1,5 +1,10 @@
 <template>
-    <div class="c-slides" @mouseenter="pause" @mouseleave="triggerAutoPlay">
+    <div class="c-slides"
+         @mouseenter="onMouseenter"
+         @mouseleave="onMouseleave"
+         @touchstart="onTouchStart"
+         @touchmove="onTouchMove"
+         @touchend="onTouchEnd">
         <div class="c-slides-window">
             <div class="c-slides-wrapper">
                 <slot></slot>
@@ -33,7 +38,9 @@
         names: [],
         childrenLength: 0,
         perIndex: 0,
-        timer: null
+        timer: null,
+        startTouch:null,
+        endTouch:null
       }
     },
     computed: {
@@ -51,7 +58,7 @@
         return vm.name
       })
       this.updateChildren()
-      this.triggerAutoPlay()
+      // this.triggerAutoPlay()
 
 
       // let first = this.$children[0]
@@ -116,20 +123,64 @@
         let run = () => {
           let index = this.names.indexOf(this.getSelected())
           let newIndex = index + 1
-          if(newIndex===-1){newIndex = this.$children.length - 1}
-          if(newIndex===this.$children.length){newIndex = 0}
+
           this.sendSelectedName(newIndex)
           this.timer = setTimeout(run,2000)
         }
         this.timer = setTimeout(run, 2000)
       },
       sendSelectedName(index) {
+        if(index===-1){index = this.$children.length - 1}
+        if(index===this.$children.length){index = 0}
         this.perIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
+        console.log('index',index)
+        console.log('this.names[index]',this.names[index])
       },
       pause() {
         clearTimeout(this.timer)
         this.timer = null
+      },
+      onMouseenter(){
+        this.pause()
+      },
+      onMouseleave(){
+        this.triggerAutoPlay()
+      },
+      onTouchStart(e){
+        this.pause()
+        this.startTouch = e.touches[0]
+        console.log('onTouchStart')
+      },
+      onTouchEnd(e){
+        this.endTouch = e.changedTouches[0]
+        let x1 = this.startTouch.clientX
+        let y1 = this.startTouch.clientY
+        let x2 = this.endTouch.clientX
+        let y2 = this.endTouch.clientY
+
+        let distance = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2))
+        let deltaY = Math.abs(y2-y1)
+        if(distance/deltaY>2){
+          if(this.endTouch.clientX > this.startTouch.clientX){
+            console.log('向右')
+            console.log(this.selectedIndex + 1);
+            this.sendSelectedName(this.selectedIndex-1)
+          }
+          if(this.endTouch.clientX < this.startTouch.clientX){
+            console.log('向左')
+            this.sendSelectedName(this.selectedIndex+1)
+
+          }
+        }
+
+        this.$nextTick(()=>{
+          // this.triggerAutoPlay()
+        })
+        console.log('onTouchEnd')
+      },
+      onTouchMove(){
+        console.log('onTouchMove')
       }
     },
     watch: {
