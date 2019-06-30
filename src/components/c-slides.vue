@@ -15,7 +15,8 @@
                 <c-icon name="left" class="icon"></c-icon>
             </span>
             <span v-for="n in childrenLength"
-                  :class="{'active':selectedIndex===n-1}" @click="sendSelectedName(n-1)">{{n}}</span>
+                  :class="{'active':selectedIndex===n-1}"
+                  @click="sendSelectedName(n-1)" :data-index="n-1">{{n}}</span>
             <span @click="sendSelectedName(selectedIndex+1)">
                 <c-icon name="right" class="icon"></c-icon>
             </span>
@@ -39,6 +40,9 @@
       autoPlay: {
         type: Boolean,
         default: true
+      },
+      autoPlayDelay:{
+        type:Number
       },
       reserve: {
         type: Boolean,
@@ -75,7 +79,7 @@
         return vm.name
       })
       this.updateChildren()
-      // this.triggerAutoPlay()
+      this.triggerAutoPlay()
 
 
       // let first = this.items[0]
@@ -142,9 +146,9 @@
           let newIndex = index + 1
 
           this.sendSelectedName(newIndex)
-          this.timer = setTimeout(run, 2000)
+          this.timer = setTimeout(run, this.autoPlayDelay)
         }
-        this.timer = setTimeout(run, 2000)
+        this.timer = setTimeout(run, this.autoPlayDelay)
       },
       sendSelectedName(index) {
         if (index === -1) {
@@ -155,8 +159,8 @@
         }
         this.perIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
-        console.log('index', index)
-        console.log('this.names[index]', this.names[index])
+        // console.log('index', index)
+        // console.log('this.names[index]', this.names[index])
       },
       pause() {
         clearTimeout(this.timer)

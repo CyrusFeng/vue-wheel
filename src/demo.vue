@@ -3,7 +3,7 @@
         <c-icon name="loading"></c-icon>
         <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
         <c-cascader :complete-source="source"></c-cascader>
-        <c-slides :selected.sync="selected" :reserve="reserve">
+        <c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">
             <c-slides-item name="1">
                 <div class="box">1</div>
             </c-slides-item>
@@ -14,6 +14,26 @@
                 <div class="box">3</div>
             </c-slides-item>
         </c-slides>
+
+        <!--<div data-v-f42f38c8="" class="c-slides">-->
+            <!--<div data-v-f42f38c8="" class="c-slides-window">-->
+                <!--<div data-v-f42f38c8="" class="c-slides-wrapper">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div>-->
+            <!--</div>-->
+            <!--<div data-v-f42f38c8="" class="dot-wrap">-->
+                <!--<span data-v-f42f38c8="">-->
+                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
+                        <!--<use data-v-5cc1379a="" xlink:href="#icon-left"></use>-->
+                    <!--</svg>-->
+                <!--</span>-->
+                <!--<span data-v-f42f38c8="">-->
+                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
+                        <!--<use data-v-5cc1379a="" xlink:href="#icon-right"></use>-->
+                    <!--</svg>-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
     </div>
 </template>
 
@@ -85,7 +105,7 @@
             },
           ]
         },
-        { name: '金华'}
+        { name: '金华' }
       ]
     }
   ]
@@ -93,16 +113,16 @@
     name: "demo",
     components: {
       'c-icon': CIcon,
-      'c-cascader':CCascader,
-      'c-slides':CSlides,
-      'c-slides-item':CSlidesItem
+      'c-cascader': CCascader,
+      'c-slides': CSlides,
+      'c-slides-item': CSlidesItem
     },
     data() {
       return {
         completeSource: [],
         source,
-        selected:'1',
-        reserve:false
+        selected: '1',
+        reserve: false
       }
     },
     created() {
@@ -122,7 +142,7 @@
 
         })
       },
-      loadData(lastItem,callback){
+      loadData(lastItem, callback) {
         this.ajax(lastItem.id).then(callback)
       },
     }
@@ -131,15 +151,16 @@
 </script>
 
 <style scoped>
-    *{
+    * {
         font-size: 16px;
     }
-    .box{
+
+    .box {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        height:300px;
+        height: 300px;
         background-color: #666666;
     }
 </style>
