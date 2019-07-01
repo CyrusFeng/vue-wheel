@@ -115,6 +115,7 @@
         })
       },
       triggerAutoPlay() {
+        if(!this.autoPlay){return}
         if (this.timer) {
           return
         }

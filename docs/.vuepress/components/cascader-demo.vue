@@ -1,49 +1,18 @@
 <template>
     <div>
-        <c-icon name="loading"></c-icon>
-        <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
-        <c-cascader :complete-source="source"></c-cascader>
-        <c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">
-            <c-slides-item name="1">
-                <div class="box">1</div>
-            </c-slides-item>
-            <c-slides-item name="2">
-                <div class="box">2</div>
-            </c-slides-item>
-            <c-slides-item name="3">
-                <div class="box">3</div>
-            </c-slides-item>
-        </c-slides>
-
-        <!--<div data-v-f42f38c8="" class="c-slides">-->
-            <!--<div data-v-f42f38c8="" class="c-slides-window">-->
-                <!--<div data-v-f42f38c8="" class="c-slides-wrapper">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div>-->
-            <!--</div>-->
-            <!--<div data-v-f42f38c8="" class="dot-wrap">-->
-                <!--<span data-v-f42f38c8="">-->
-                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
-                        <!--<use data-v-5cc1379a="" xlink:href="#icon-left"></use>-->
-                    <!--</svg>-->
-                <!--</span>-->
-                <!--<span data-v-f42f38c8="">-->
-                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
-                        <!--<use data-v-5cc1379a="" xlink:href="#icon-right"></use>-->
-                    <!--</svg>-->
-                <!--</span>-->
-            <!--</div>-->
-        <!--</div>-->
-
+        <div class="wrap">
+            <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
+            <c-cascader :complete-source="source"></c-cascader>
+        </div>
+        <pre><code>{{code}}</code></pre>
     </div>
+
 </template>
 
 <script>
-  import CIcon from './components/c-icon'
-  import CCascader from './components/c-cascader'
-  import db from '../tests/fixtrues/region'
-
-  import CSlides from './components/c-slides'
-  import CSlidesItem from './components/c-slides-item'
-
+  import CIcon from '../../../src/components/c-icon'
+  import CCascader from '../../../src/components/c-cascader'
+  import db from '../../../tests/fixtrues/region'
 
   var source = [
     {
@@ -108,8 +77,9 @@
       ]
     }
   ]
+
   export default {
-    name: "demo",
+    name: "demo-cascader",
     components: {
       'c-icon': CIcon,
       'c-cascader': CCascader,
@@ -120,8 +90,8 @@
       return {
         completeSource: [],
         source,
-        selected: '1',
-        reserve: false
+        code:`<c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
+<c-cascader :complete-source="source"></c-cascader>`
       }
     },
     created() {
@@ -145,21 +115,17 @@
         this.ajax(lastItem.id).then(callback)
       },
     }
-
   }
+
 </script>
 
-<style scoped>
-    * {
-        font-size: 16px;
+<style scoped lang="scss">
+.wrap{
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    /*align-items: center;*/
+    > *{
+        margin-bottom: 100px;
     }
-
-    .box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 300px;
-        background-color: #666666;
-    }
+}
 </style>
