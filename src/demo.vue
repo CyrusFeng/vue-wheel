@@ -1,19 +1,19 @@
 <template>
     <div>
-        <c-icon name="loading"></c-icon>
-        <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
-        <c-cascader :complete-source="source"></c-cascader>
-        <c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">
-            <c-slides-item name="1">
-                <div class="box">1</div>
-            </c-slides-item>
-            <c-slides-item name="2">
-                <div class="box">2</div>
-            </c-slides-item>
-            <c-slides-item name="3">
-                <div class="box">3</div>
-            </c-slides-item>
-        </c-slides>
+        <!--<c-icon name="loading"></c-icon>-->
+        <!--<c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>-->
+        <!--<c-cascader :complete-source="source"></c-cascader>-->
+        <!--<c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">-->
+            <!--<c-slides-item name="1">-->
+                <!--<div class="box">1</div>-->
+            <!--</c-slides-item>-->
+            <!--<c-slides-item name="2">-->
+                <!--<div class="box">2</div>-->
+            <!--</c-slides-item>-->
+            <!--<c-slides-item name="3">-->
+                <!--<div class="box">3</div>-->
+            <!--</c-slides-item>-->
+        <!--</c-slides>-->
 
         <!--<div data-v-f42f38c8="" class="c-slides">-->
             <!--<div data-v-f42f38c8="" class="c-slides-window">-->
@@ -32,6 +32,12 @@
                 <!--</span>-->
             <!--</div>-->
         <!--</div>-->
+        <!--<c-nav :active-items="activeItems" @update:activeItems="activeItems=$event" :multiple="false">-->
+        <c-nav :active-items.sync="activeItems">
+            <c-nav-item name="home">首页</c-nav-item>
+            <c-nav-item name="about">关于</c-nav-item>
+            <c-nav-item name="xxx">首页</c-nav-item>
+        </c-nav>
 
     </div>
 </template>
@@ -43,6 +49,9 @@
 
   import CSlides from './components/c-slides'
   import CSlidesItem from './components/c-slides-item'
+  import CNav from './components/nav/nav'
+  import CNavItem from './components/nav/nav-item'
+  import CSubNav from './components/nav/sub-nav'
 
 
   var source = [
@@ -114,14 +123,18 @@
       'c-icon': CIcon,
       'c-cascader': CCascader,
       'c-slides': CSlides,
-      'c-slides-item': CSlidesItem
+      'c-slides-item': CSlidesItem,
+      'c-nav': CNav,
+      'c-nav-item': CNavItem,
+      'c-sub-nav': CSubNav,
     },
     data() {
       return {
         completeSource: [],
         source,
         selected: '1',
-        reserve: false
+        reserve: false,
+        activeItems:['home']
       }
     },
     created() {
