@@ -7,6 +7,7 @@
 <script>
   export default {
     name: "nav-item",
+    inject:['root'],
     props:{
       name:{
         type:String
@@ -21,12 +22,17 @@
       onClick(){
         this.$emit('add:selected',this.name)
       }
+    },
+    created(){
+      this.root.addItem(this)
     }
+
   }
 </script>
 
 <style scoped lang="scss">
 .nav-item-wrap{
+    padding: 6px 10px;
     &.active{
         background-color: red;
     }

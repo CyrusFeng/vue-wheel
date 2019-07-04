@@ -7,6 +7,11 @@
 <script>
   export default {
     name: "nav",
+    provide(){
+      return {
+        root:this
+      }
+    },
     props: {
       activeItems: {
         type: Array,
@@ -17,6 +22,11 @@
         default:false
       }
     },
+    data(){
+      return {
+        navItems:[]
+      }
+    },
     mounted() {
       this.updateItemStatus()
       this.addListenerToChildren()
@@ -24,13 +34,13 @@
     updated(){
       this.updateItemStatus()
     },
-    computed: {
-      navItems() {
-        return this.$children.filter((vm) => {
-          return vm.$options.name === 'nav-item'
-        })
-      }
-    },
+    // computed: {
+    //   navItems() {
+    //     return this.$children.filter((vm) => {
+    //       return vm.$options.name === 'nav-item'
+    //     })
+    //   }
+    // },
     methods:{
       updateItemStatus(){
         this.navItems.forEach((vm) => {
@@ -57,6 +67,10 @@
             }
           })
         })
+      },
+      //子组件created时会调用该方法
+      addItem(vm){
+        this.navItems.push(vm)
       }
     }
   }
@@ -66,6 +80,6 @@
     .c-nav-wrap {
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-start;
     }
 </style>

@@ -35,8 +35,13 @@
         <!--<c-nav :active-items="activeItems" @update:activeItems="activeItems=$event" :multiple="false">-->
         <c-nav :active-items.sync="activeItems">
             <c-nav-item name="home">首页</c-nav-item>
-            <c-nav-item name="about">关于</c-nav-item>
-            <c-nav-item name="xxx">首页</c-nav-item>
+            <c-sub-nav name="about">
+                <template slot="title">关于</template>
+
+                <c-nav-item name="culture">企业文化</c-nav-item>
+                <c-nav-item name="dev">开发团队</c-nav-item>
+            </c-sub-nav>
+            <c-nav-item name="other">其他</c-nav-item>
         </c-nav>
 
     </div>
