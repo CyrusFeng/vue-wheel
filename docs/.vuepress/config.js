@@ -1,9 +1,10 @@
 module.exports = {
+  base:'/vue-wheel/',
   title: 'vue-wheel',
   description: 'Just playing around',
   themeConfig: {
     sidebar: [
-      '/install/',
+      '/start/',
       {
         title: 'components',
         collapsable: false,

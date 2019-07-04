@@ -83,8 +83,6 @@
     components: {
       'c-icon': CIcon,
       'c-cascader': CCascader,
-      'c-slides': CSlides,
-      'c-slides-item': CSlidesItem
     },
     data() {
       return {
