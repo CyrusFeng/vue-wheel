@@ -4,6 +4,7 @@ import Demo from "./demo.vue";
 import './reset.css'
 import './icons'
 // import './svg/cancel.svg'
+import './reset.css'
 
 Vue.config.productionTip = false
 

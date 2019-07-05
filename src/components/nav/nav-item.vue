@@ -31,10 +31,19 @@
 </script>
 
 <style scoped lang="scss">
+    @import '../../style_var';
 .nav-item-wrap{
-    padding: 6px 10px;
+    padding: 10px 20px;
+    position: relative;
     &.active{
-        background-color: red;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid $blue;
+        }
     }
 }
 </style>

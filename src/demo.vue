@@ -40,6 +40,11 @@
 
                 <c-nav-item name="culture">企业文化</c-nav-item>
                 <c-nav-item name="dev">开发团队</c-nav-item>
+                <c-sub-nav name="about">
+                    <template slot="title">联系方式</template>
+                    <c-nav-item name="qq">QQ</c-nav-item>
+                    <c-nav-item name="wechat">WeChat</c-nav-item>
+                </c-sub-nav>
             </c-sub-nav>
             <c-nav-item name="other">其他</c-nav-item>
         </c-nav>

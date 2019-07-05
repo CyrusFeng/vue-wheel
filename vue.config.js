@@ -126,5 +126,12 @@ module.exports = {
         symbolId: "icon-[name]"
       })
       .end();
+  },
+  css:{
+    loaderOptions:{
+      sass:{
+        includePaths:[path.join(__dirname,'style')]
+      }
+    }
   }
 };

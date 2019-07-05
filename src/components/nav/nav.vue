@@ -76,10 +76,14 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import '../../style_var';
     .c-nav-wrap {
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
+        border-bottom: 1px solid $grey;
+        font-size: 0;
+        cursor: default;
     }
 </style>
