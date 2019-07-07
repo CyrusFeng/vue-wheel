@@ -1,5 +1,5 @@
 <template>
-    <div class="sub-nav-wrap">
+    <div class="sub-nav-wrap" :class="{active}">
         <span class="sub-title" @click="onClick">
             <slot name="title"></slot>
         </span>
@@ -13,14 +13,35 @@
   export default {
     name: "sub-nav",
     inject: ['root'],
+    props: {
+      name: {
+        type: String
+      }
+    },
     data() {
       return {
-        open: false
+        open: false,
+      }
+    },
+    computed:{
+      active(){
+        console.log('active',this.root.selectedItemNameArr.indexOf(this.name)>-1)
+        return this.root.selectedItemNameArr.indexOf(this.name)>-1?true:false
       }
     },
     methods: {
       onClick() {
         this.open = !this.open
+      },
+      updateSelectedItemNameArr() {
+        // this.active = true
+        this.root.selectedItemNameArr.unshift(this.name)
+
+        if (this.$parent.updateSelectedItemNameArr) {
+          this.$parent.updateSelectedItemNameArr()
+        } else {
+          // this.root.selectedItemNameArr.length = 0
+        }
       }
     }
   }
@@ -46,9 +67,20 @@
             box-shadow: 0 0 3px fade_out(black, 0.8);
             border-radius: $border-radius;
         }
+        &.active {
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                border-bottom: 2px solid $blue;
+            }
+        }
         .sub-nav-wrap {
-            .sub-title{
+            .sub-title {
                 font-size: $font-size;
+                color: $light-color;
             }
             .sub-nav {
                 left: 100%;
@@ -59,10 +91,10 @@
         .sub-nav .nav-item-wrap {
             color: $light-color;
             font-size: $font-size;
-            &.active{
+            &.active {
                 background-color: $grey;
                 color: $color;
-                &::after{
+                &::after {
                     display: none;
                 }
             }

@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <div class="input-wrap">
+    <div class="cascader-wrap" ref="cascader">
+        <div class="input-wrap" @click.stop="toggle">
             <input type="text" :value="result">
             <c-icon class="icon" name="cancel" @click="cancel"></c-icon>
         </div>
-        <div class="popover">
+        <div class="popover" v-if="popoverVisible">
             <g-cascader-item :load-data="loadData"
                              :source="completeSource"
                              :level="level"
@@ -36,7 +36,8 @@
     data() {
       return {
         selectedData: [],
-        level: 0
+        level: 0,
+        popoverVisible: false,
       }
     },
     computed: {
@@ -49,6 +50,33 @@
     methods: {
       cancel(){
         this.selectedData = []
+      },
+      toggle () {
+        if (this.popoverVisible === true) {
+          this.close()
+        } else {
+          this.open()
+        }
+      },
+      open () {
+        this.popoverVisible = true
+        this.$nextTick(()=>{
+          document.addEventListener('click',this.onClickDocument)
+        })
+      },
+      close () {
+        console.log('xxxx')
+        this.popoverVisible = false
+        document.removeEventListener('click',this.onClickDocument)
+      },
+      onClickDocument(e){
+        console.log('e.target',e.target)
+        // console.log('x',this.$options.name)
+        let cascader = this.$refs.cascader
+        if(cascader === e.target||cascader.contains(e.target)){
+          return
+        }
+        this.close()
       }
     },
     created() {
@@ -59,6 +87,9 @@
 
 <style scoped lang="scss">
     @import "../style_var.scss";
+    .cascader-wrap{
+        display: inline-block;
+    }
     .input-wrap{
         display: inline-flex;
         align-items: center;

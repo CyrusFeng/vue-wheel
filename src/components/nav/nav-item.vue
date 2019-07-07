@@ -20,6 +20,8 @@
     },
     methods:{
       onClick(){
+        this.root.selectedItemNameArr = []
+        this.$parent.updateSelectedItemNameArr && this.$parent.updateSelectedItemNameArr()
         this.$emit('add:selected',this.name)
       }
     },

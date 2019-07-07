@@ -118,6 +118,7 @@
                 min-width: 5em;
                 margin-right: 1em;
                 user-select: none;
+                white-space: nowrap;
             }
             .icon{
                 margin-left: 1em;

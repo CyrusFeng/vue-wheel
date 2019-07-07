@@ -1,5 +1,6 @@
 <template>
     <div class="c-nav-wrap">
+        <span style="font-size:12px">{{selectedItemNameArr}}</span>
         <slot></slot>
     </div>
 </template>
@@ -24,7 +25,8 @@
     },
     data(){
       return {
-        navItems:[]
+        navItems:[],
+        selectedItemNameArr:[]
       }
     },
     mounted() {
