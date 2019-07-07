@@ -1,6 +1,7 @@
 <template>
-    <div class="cascader-wrap" ref="cascader">
-        <div class="input-wrap" @click.stop="toggle">
+    <div class="cascader-wrap" ref="cascader" v-click-outside="close">
+        <!--<div class="input-wrap" @click.stop="toggle">-->
+        <div class="input-wrap" @click="toggle">
             <input type="text" :value="result">
             <c-icon class="icon" name="cancel" @click="cancel"></c-icon>
         </div>
@@ -18,12 +19,17 @@
 <script>
   import Item from './c-cascader-item'
   import CIcon from './c-icon'
+  import ClickOutside from '../click-outside'
+  import {removeListener} from '../click-outside'
 
   export default {
     name: "g-cascader",
     components: {
       "g-cascader-item": Item,
       'c-icon':CIcon
+    },
+    directives:{
+      ClickOutside
     },
     props: {
       completeSource: {
@@ -60,27 +66,30 @@
       },
       open () {
         this.popoverVisible = true
-        this.$nextTick(()=>{
-          document.addEventListener('click',this.onClickDocument)
-        })
+        // this.$nextTick(()=>{
+        //   document.addEventListener('click',this.onClickDocument)
+        // })
       },
       close () {
-        console.log('xxxx')
+        // console.log('xxxx')
         this.popoverVisible = false
-        document.removeEventListener('click',this.onClickDocument)
+        // document.removeEventListener('click',this.onClickDocument)
       },
-      onClickDocument(e){
-        console.log('e.target',e.target)
-        // console.log('x',this.$options.name)
-        let cascader = this.$refs.cascader
-        if(cascader === e.target||cascader.contains(e.target)){
-          return
-        }
-        this.close()
-      }
+      // onClickDocument(e){
+      //   console.log('e.target',e.target)
+      //   // console.log('x',this.$options.name)
+      //   let cascader = this.$refs.cascader
+      //   if(cascader === e.target||cascader.contains(e.target)){
+      //     return
+      //   }
+      //   this.close()
+      // }
     },
     created() {
 
+    },
+    beforeDestroy(){
+      removeListener()
     }
   }
 </script>
