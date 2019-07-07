@@ -1,23 +1,9 @@
 <template>
     <div>
         <!--<c-icon name="loading"></c-icon>-->
-        <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <c-cascader :complete-source="source"></c-cascader>
+        <!--<c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>-->
+
+        <!--<c-cascader :complete-source="source"></c-cascader>-->
         <!--<c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">-->
             <!--<c-slides-item name="1">-->
                 <!--<div class="box">1</div>-->
@@ -49,26 +35,26 @@
         <!--</div>-->
         <!--<c-nav :active-items="activeItems" @update:activeItems="activeItems=$event" :multiple="false">-->
 
-        <!--<c-nav :active-items.sync="activeItems">-->
-            <!--<c-nav-item name="home">首页</c-nav-item>-->
-            <!--<c-sub-nav name="about">-->
-                <!--<template slot="title">关于</template>-->
+        <c-nav :active-items.sync="activeItems">
+            <c-nav-item name="home">首页</c-nav-item>
+            <c-sub-nav name="about">
+                <template slot="title">关于</template>
 
-                <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
-                <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
-                <!--<c-sub-nav name="contact">-->
-                    <!--<template slot="title">联系方式</template>-->
-                    <!--<c-nav-item name="qq">QQ</c-nav-item>-->
-                    <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
-                    <!--<c-sub-nav name="phone">-->
-                        <!--<template slot="title">手机号</template>-->
-                        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
-                        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
-                    <!--</c-sub-nav>-->
-                <!--</c-sub-nav>-->
-            <!--</c-sub-nav>-->
-            <!--<c-nav-item name="other">其他</c-nav-item>-->
-        <!--</c-nav>-->
+                <c-nav-item name="culture">企业文化</c-nav-item>
+                <c-nav-item name="dev">开发团队</c-nav-item>
+                <c-sub-nav name="contact">
+                    <template slot="title">联系方式</template>
+                    <c-nav-item name="qq">QQ</c-nav-item>
+                    <c-nav-item name="wechat">WeChat</c-nav-item>
+                    <c-sub-nav name="phone">
+                        <template slot="title">手机号</template>
+                        <c-nav-item name="in">国内：111</c-nav-item>
+                        <c-nav-item name="out">国外：222</c-nav-item>
+                    </c-sub-nav>
+                </c-sub-nav>
+            </c-sub-nav>
+            <c-nav-item name="other">其他</c-nav-item>
+        </c-nav>
 
     </div>
 </template>

@@ -2,11 +2,8 @@ let bindCallbackMap = []
 
 let onClickDocument = (e)=>{
   let {target} = e
-  console.log('click')
   bindCallbackMap.forEach((item)=>{
-
     if(target === item.el || item.el.contains(target)){
-      console.log('dianjiinput')
       return
     }else{
       item.callback()

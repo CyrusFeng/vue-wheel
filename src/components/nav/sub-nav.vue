@@ -1,5 +1,5 @@
 <template>
-    <div class="sub-nav-wrap" :class="{active}">
+    <div class="sub-nav-wrap" :class="{active}" v-click-outside="close">
         <span class="sub-title" @click="onClick">
             <slot name="title"></slot>
         </span>
@@ -10,9 +10,14 @@
 </template>
 
 <script>
+  import ClickOutside from '../../click-outside'
+  import {removeListener} from '../../click-outside'
   export default {
     name: "sub-nav",
     inject: ['root'],
+    directives:{
+      ClickOutside
+    },
     props: {
       name: {
         type: String
@@ -33,6 +38,9 @@
       onClick() {
         this.open = !this.open
       },
+      close(){
+        this.open = false
+      },
       updateSelectedItemNameArr() {
         // this.active = true
         this.root.selectedItemNameArr.unshift(this.name)
@@ -43,6 +51,9 @@
           // this.root.selectedItemNameArr.length = 0
         }
       }
+    },
+    beforeDestroy(){
+      removeListener()
     }
   }
 </script>

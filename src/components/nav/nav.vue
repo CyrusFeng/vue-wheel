@@ -1,8 +1,12 @@
 <template>
-    <div class="c-nav-wrap">
-        <span style="font-size:12px">{{selectedItemNameArr}}</span>
-        <slot></slot>
+    <div>
+        <!--<div><span style="font-size:12px">{{selectedItemNameArr}}</span></div>-->
+        <div class="c-nav-wrap">
+
+            <slot></slot>
+        </div>
     </div>
+
 </template>
 
 <script>
