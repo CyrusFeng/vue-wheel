@@ -91,5 +91,6 @@
         border-bottom: 1px solid $grey;
         font-size: 0;
         cursor: default;
+        user-select: none;
     }
 </style>

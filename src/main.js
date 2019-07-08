@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Demo from "./demo.vue";
-import './reset.css'
-import './icons'
-// import './svg/cancel.svg'
-import './reset.css'
+import './reset.css';
+// import './icons'
+
 
 Vue.config.productionTip = false
 

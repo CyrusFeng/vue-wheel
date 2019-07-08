@@ -1,8 +1,12 @@
 <template>
     <div class="sub-nav-wrap" :class="{active}" v-click-outside="close">
-        <span class="sub-title" @click="onClick">
+        <p class="sub-title" @click="onClick">
             <slot name="title"></slot>
-        </span>
+            <span class="icon-wrap" :class="{open}">
+                <c-icon class="icon" name="right"></c-icon>
+                <!--<c-icon v-else class="icon" name="right"></c-icon>-->
+            </span>
+        </p>
         <div class="sub-nav" v-show="open">
             <slot></slot>
         </div>
@@ -12,11 +16,15 @@
 <script>
   import ClickOutside from '../../click-outside'
   import {removeListener} from '../../click-outside'
+  import CIcon from '../c-icon'
   export default {
     name: "sub-nav",
     inject: ['root'],
     directives:{
       ClickOutside
+    },
+    components:{
+      'c-icon':CIcon
     },
     props: {
       name: {
@@ -63,10 +71,14 @@
 
     .sub-nav-wrap {
         position: relative;
-        span {
+        .sub-title {
             display: block;
             padding: 10px 20px;
+            > .icon-wrap{
+                display: none;
+            }
         }
+
         .sub-nav {
             margin-top: 1px;
             position: absolute;
@@ -96,7 +108,6 @@
             .sub-nav {
                 left: 100%;
                 top: 0;
-
             }
         }
         .sub-nav .nav-item-wrap {
@@ -105,6 +116,27 @@
             &.active {
                 background-color: $grey;
                 color: $color;
+                &::after {
+                    display: none;
+                }
+            }
+        }
+        .sub-nav .sub-nav-wrap{
+            .sub-title{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .icon-wrap{
+                    display: inline-flex !important;
+                    justify-content: center;
+                    align-items: center;
+                    transition: transform 0.3s;
+                    &.open{
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            &.active {
                 &::after {
                     display: none;
                 }

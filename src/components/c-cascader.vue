@@ -98,6 +98,8 @@
     @import "../style_var.scss";
     .cascader-wrap{
         display: inline-block;
+        vertical-align: top;
+        font-size: 16px;
     }
     .input-wrap{
         display: inline-flex;

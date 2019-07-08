@@ -1,9 +1,9 @@
 <template>
     <div>
         <!--<c-icon name="loading"></c-icon>-->
-        <!--<c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>-->
+        <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
 
-        <!--<c-cascader :complete-source="source"></c-cascader>-->
+        <c-cascader :complete-source="source"></c-cascader>
         <!--<c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">-->
             <!--<c-slides-item name="1">-->
                 <!--<div class="box">1</div>-->

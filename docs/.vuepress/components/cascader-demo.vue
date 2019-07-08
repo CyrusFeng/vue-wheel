@@ -1,8 +1,12 @@
 <template>
-    <div>
+    <div class="container">
         <div class="wrap">
-            <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
-            <c-cascader :complete-source="source"></c-cascader>
+            <div>
+                <c-cascader :complete-source="completeSource" :load-data="loadData"></c-cascader>
+            </div>
+            <div>
+                <c-cascader :complete-source="source"></c-cascader>
+            </div>
         </div>
         <pre><code>{{code}}</code></pre>
     </div>
@@ -118,6 +122,10 @@
 </script>
 
 <style scoped lang="scss">
+    @import "../../../src/reset.css";
+    .container{
+        font-size: 16px;
+    }
 .wrap{
     /*display: flex;*/
     /*justify-content: space-around;*/
@@ -125,5 +133,6 @@
     > *{
         margin-bottom: 100px;
     }
+
 }
 </style>

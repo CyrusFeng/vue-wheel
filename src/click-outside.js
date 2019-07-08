@@ -11,7 +11,7 @@ let onClickDocument = (e)=>{
     }
   })
 }
-document.addEventListener('click',onClickDocument)
+isBrowser() && document.addEventListener('click',onClickDocument)
 
 export default {
   bind:function (el, binding, vnode) {
@@ -20,7 +20,11 @@ export default {
 }
 
 let removeListener = ()=>{
-  document.removeEventListener('click',onClickDocument)
+  isBrowser() && document.removeEventListener('click',onClickDocument)
 }
 
 export {removeListener}
+
+function isBrowser() {
+  return typeof document === 'object'
+}

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  // import '../svg'
-  // import '../icons/svg/cancel.svg';
+  import '../svgALi'
+  // import '../icons/svg';
   export default {
     name: "c-icon",
     props: {

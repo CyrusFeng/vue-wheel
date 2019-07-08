@@ -226,6 +226,7 @@
 </script>
 
 <style scoped lang="scss">
+    @import "../style_var.scss";
     .c-slides {
         margin: 40px;
         display: block;
