@@ -1,8 +1,7 @@
 <template>
     <div>
         <!--<div><span style="font-size:12px">{{selectedItemNameArr}}</span></div>-->
-        <div class="c-nav-wrap">
-
+        <div class="c-nav-wrap" :class="{vertical}">
             <slot></slot>
         </div>
     </div>
@@ -14,7 +13,8 @@
     name: "nav",
     provide(){
       return {
-        root:this
+        root:this,
+        vertical:this.vertical
       }
     },
     props: {
@@ -23,6 +23,10 @@
         default: () => []
       },
       multiple:{
+        type:Boolean,
+        default:false
+      },
+      vertical:{
         type:Boolean,
         default:false
       }
@@ -92,5 +96,14 @@
         font-size: 0;
         cursor: default;
         user-select: none;
+        &.vertical{
+            flex-direction: column;
+            border: 1px solid $grey;
+            > .nav-item-wrap{
+              width: 100%;
+            }
+        }
+
     }
+
 </style>

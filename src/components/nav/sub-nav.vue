@@ -1,5 +1,5 @@
 <template>
-    <div class="sub-nav-wrap" :class="{active}" v-click-outside="close">
+    <div class="sub-nav-wrap" :class="{active,vertical}" v-click-outside="close">
         <p class="sub-title" @click="onClick">
             <slot name="title"></slot>
             <span class="icon-wrap" :class="{open}">
@@ -7,9 +7,17 @@
                 <!--<c-icon v-else class="icon" name="right"></c-icon>-->
             </span>
         </p>
-        <div class="sub-nav" v-show="open">
+        <template v-if="vertical">
+            <transition @after-enter="afterEnter" @enter="enter" @leave="leave" @after-leave="afterLeave">
+                <div class="sub-nav" v-show="open">
+                    <slot></slot>
+                </div>
+            </transition>
+        </template>
+        <div v-else class="sub-nav" v-show="open">
             <slot></slot>
         </div>
+
     </div>
 </template>
 
@@ -17,14 +25,15 @@
   import ClickOutside from '../../click-outside'
   import {removeListener} from '../../click-outside'
   import CIcon from '../c-icon'
+
   export default {
     name: "sub-nav",
-    inject: ['root'],
-    directives:{
+    inject: ['root', 'vertical'],
+    directives: {
       ClickOutside
     },
-    components:{
-      'c-icon':CIcon
+    components: {
+      'c-icon': CIcon
     },
     props: {
       name: {
@@ -36,17 +45,17 @@
         open: false,
       }
     },
-    computed:{
-      active(){
-        console.log('active',this.root.selectedItemNameArr.indexOf(this.name)>-1)
-        return this.root.selectedItemNameArr.indexOf(this.name)>-1?true:false
+    computed: {
+      active() {
+        console.log('active', this.root.selectedItemNameArr.indexOf(this.name) > -1)
+        return this.root.selectedItemNameArr.indexOf(this.name) > -1 ? true : false
       }
     },
     methods: {
       onClick() {
         this.open = !this.open
       },
-      close(){
+      close() {
         this.open = false
       },
       updateSelectedItemNameArr() {
@@ -58,9 +67,36 @@
         } else {
           // this.root.selectedItemNameArr.length = 0
         }
+      },
+
+      enter(el, done) {
+        let {height} = el.getBoundingClientRect()
+        console.log(height)
+        el.style.height = 0
+        el.getBoundingClientRect()
+        el.style.height = `${height}px`
+        el.addEventListener('transitionend',()=>{
+          done()
+        })
+      },
+      afterEnter(el){
+        el.style.height = 'auto'
+      },
+      leave(el, done) {
+        let {height} = el.getBoundingClientRect()
+        el.style.height = `${height}px`
+        el.getBoundingClientRect()
+        el.style.height = 0
+        el.addEventListener('transitionend',()=>{
+          done()
+        })
+        // done()
+      },
+      afterLeave(el) {
+        el.style.height = 'auto'
       }
     },
-    beforeDestroy(){
+    beforeDestroy() {
       removeListener()
     }
   }
@@ -74,23 +110,24 @@
         .sub-title {
             display: block;
             padding: 10px 20px;
-            > .icon-wrap{
+            > .icon-wrap {
                 display: none;
             }
         }
-
         .sub-nav {
             margin-top: 1px;
             position: absolute;
             left: 0;
             top: 100%;
-            min-width: 8em;
+            /*min-width: 8em;*/
             white-space: nowrap;
-            background-color: #fff;
+            /*background-color: #fff;*/
             box-shadow: 0 0 3px fade_out(black, 0.8);
             border-radius: $border-radius;
+            transition: height .3s;
         }
         &.active {
+            /*width: 100%;*/
             &::after {
                 content: '';
                 position: absolute;
@@ -110,28 +147,18 @@
                 top: 0;
             }
         }
-        .sub-nav .nav-item-wrap {
-            color: $light-color;
-            font-size: $font-size;
-            &.active {
-                background-color: $grey;
-                color: $color;
-                &::after {
-                    display: none;
-                }
-            }
-        }
-        .sub-nav .sub-nav-wrap{
-            .sub-title{
+
+        .sub-nav .sub-nav-wrap {
+            .sub-title {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                .icon-wrap{
+                .icon-wrap {
                     display: inline-flex !important;
                     justify-content: center;
                     align-items: center;
                     transition: transform 0.3s;
-                    &.open{
+                    &.open {
                         transform: rotate(180deg);
                     }
                 }
@@ -142,7 +169,33 @@
                 }
             }
         }
+        &.vertical {
+            width: 100%;
+            .sub-nav {
+                margin-left: 0.5em;
+                margin-top: 1px;
+                position: static;
+                left: 0;
+                top: 100%;
+                white-space: nowrap;
+                box-shadow: none;
+                border-radius: 0;
+                overflow: hidden;
+
+                /*<!--border-top: 1px solid $grey;-->*/
+
+            }
+            &.active {
+                width: 100%;
+            }
+        }
     }
 
+    /*.fade-enter-active, .fade-leave-active {*/
+    /*transition: opacity .3s;*/
+    /*}*/
+    /*.fade-enter, .fade-leave-to !* .fade-leave-active below version 2.1.8 *! {*/
+    /*opacity: 0;*/
+    /*}*/
 
 </style>

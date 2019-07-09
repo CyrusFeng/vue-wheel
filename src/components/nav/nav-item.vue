@@ -37,6 +37,8 @@
 .nav-item-wrap{
     padding: 10px 20px;
     position: relative;
+    /*<!--font-size: $font-size;-->*/
+    /*<!--color: $light-color;-->*/
     &.active{
         &::after{
             content: '';
@@ -48,4 +50,15 @@
         }
     }
 }
+    .c-nav-wrap .sub-nav-wrap .nav-item-wrap {
+        color: $light-color !important;
+        font-size: $font-size !important;
+        &.active {
+            background-color: $grey;
+            color: $color;
+            &::after {
+                display: none;
+            }
+        }
+    }
 </style>
