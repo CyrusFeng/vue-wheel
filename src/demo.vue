@@ -58,7 +58,9 @@
         </c-nav>
 
         <c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">
-            <c-nav-item name="home">首页</c-nav-item>
+            <c-nav-item name="home">
+                <a href="">首页</a>
+            </c-nav-item>
             <c-sub-nav name="about">
                 <template slot="title">关于</template>
 

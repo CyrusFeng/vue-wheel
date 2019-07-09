@@ -85,7 +85,7 @@
       leave(el, done) {
         let {height} = el.getBoundingClientRect()
         el.style.height = `${height}px`
-        el.getBoundingClientRect()
+        el.getBoundingClientRect() //让浏览器计算元素宽高等属性值，迫使其不会合并上下两个赋值语句
         el.style.height = 0
         el.addEventListener('transitionend',()=>{
           done()
@@ -126,17 +126,25 @@
             border-radius: $border-radius;
             transition: height .3s;
         }
-        &.active {
-            /*width: 100%;*/
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                border-bottom: 2px solid $blue;
+        &:not(.vertical){
+            &.active {
+                /*width: 100%;*/
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    border-bottom: 2px solid $blue;
+                }
             }
         }
+        &.vertical{
+            &.active {
+                color: $blue;
+            }
+        }
+
         .sub-nav-wrap {
             .sub-title {
                 font-size: $font-size;
@@ -159,7 +167,7 @@
                     align-items: center;
                     transition: transform 0.3s;
                     &.open {
-                        transform: rotate(180deg);
+                        transform: rotate(90deg);
                     }
                 }
             }
