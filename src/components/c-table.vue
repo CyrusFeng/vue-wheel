@@ -3,13 +3,22 @@
         <table class="table" :class="{bordered,compact,striped}">
             <thead>
             <tr>
-                <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"></th>
+                <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected">
+                </th>
                 <th v-if="numberVisible">#</th>
-                <th v-for="column in columns" :key="column.field">{{column.text}}</th>
+                <th v-for="column in columns" :key="column.field">
+                    <div class="wrapper">
+                        <span>{{column.text}}</span>
+                        <span class="sort-btns" @click="sort(column)" v-if="column.openSort">
+                            <c-icon :class="{active:column.sort==='asc'}" name="asc"></c-icon>
+                            <c-icon :class="{active:column.sort==='desc'}" name="desc"></c-icon>
+                        </span>
+                    </div>
+                </th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item,index in dataSource" :key="item.id">
+            <tr v-for="(item,index) in dataSource" :key="item.id">
                 <td><input type="checkbox" @change="onChangeItem($event,item)"
                            :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
                 <td v-if="numberVisible">{{index+1}}</td>
@@ -19,21 +28,31 @@
             </tr>
             </tbody>
         </table>
+        <div class="loading-wrap" v-if="loading&&!isFrontendSort">
+            <c-icon name="loading" class="loading"></c-icon>
+        </div>
     </div>
 </template>
 
 <script>
+  import CIcon from './c-icon'
+
   export default {
     name: "c-table",
+    components: {
+      'c-icon': CIcon
+    },
     props: {
       selectedTableItems: {
         type: Array
       },
       columns: {
-        type: Array
+        type: Array,
+        default: () => []
       },
       dataSource: {
         type: Array,
+        default: () => [],
         validator(array) {
           return array.filter(item => item.id === undefined).length <= 0;
         }
@@ -57,23 +76,58 @@
       striped: {
         type: Boolean,
         default: true
+      },
+      isFrontendSort: {
+        type: Boolean
+      },
+      loading:{
+        type:Boolean
       }
     },
     data() {
       return {}
+    },
+    computed: {
+      areAllItemsSelected() {
+        //判断是否全选
+        //使用排序算法将数据按id排序，然后一一对比相同index的数据项是否相等
+        let a = this.dataSource.map(item => item.id).sort()
+        let b = this.selectedTableItems.map(item => item.id).sort()
+        let equal = true
+
+        if (this.selectedTableItems.length !== this.dataSource.length) {
+          equal = false
+        } else {
+          for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+              equal = false
+              break
+            }
+          }
+        }
+        return equal
+      }
     },
     watch: {
       selectedTableItems() {
 
         if (this.selectedTableItems.length === this.dataSource.length) {
           this.$refs.allChecked.indeterminate = false
-          this.$refs.allChecked.checked = true
-        } else if(this.selectedTableItems.length === 0){
+          // this.$refs.allChecked.checked = true
+        } else if (this.selectedTableItems.length === 0) {
           this.$refs.allChecked.indeterminate = false
-          this.$refs.allChecked.checked = false
-        }else{
+          // this.$refs.allChecked.checked = false
+        } else {
           this.$refs.allChecked.indeterminate = true
         }
+      },
+      columns: {
+        handler(newValue, oldValue) {
+          if (this.isFrontendSort) {
+            this.order(newValue)
+          }
+        },
+        immediate: true
       }
     },
     methods: {
@@ -84,7 +138,7 @@
         if (selected) {
           copy.push(item)
         } else {
-          copy = copy.filter(i=>i.id !== item.id)
+          copy = copy.filter(i => i.id !== item.id)
         }
         this.$emit('update:selectedTableItems', copy)
       },
@@ -95,6 +149,45 @@
         } else {
           this.$emit('update:selectedTableItems', [])
         }
+      },
+      sort(column) {
+        let copy = JSON.parse(JSON.stringify(this.columns))
+        copy.forEach((item) => {
+          if (item.field === column.field) {
+            if (column.sort === 'asc') {
+              item.sort = 'desc'
+            } else if (column.sort === 'desc') {
+              item.sort = 'normal'
+            } else if (column.sort === 'normal') {
+              item.sort = 'asc'
+            }
+          }
+        })
+        this.$emit('update:columns', copy)
+        if(this.isFrontendSort){
+          this.order(copy)
+        }
+      },
+      order(columns) {
+        let copy = JSON.parse(JSON.stringify(this.dataSource))
+        columns.forEach((column) => {
+          if (column.openSort) {
+            this.sortByKey(copy, column.field, column.sort)
+          }
+        })
+        this.$emit('update:dataSource', copy)
+        // this.dataSource = this.dataSource.sort((a,b)=>a-b)
+      },
+      sortByKey(array, key, order) {
+        return array.sort((a, b) => {
+          let x = a[key];
+          let y = b[key];
+          if (order === 'asc') {
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+          } else if (order === 'desc') {
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+          }
+        });
       }
     }
   }
@@ -105,43 +198,83 @@
 
     $darkgrey: darken($grey, 10%);
     $lightgrey: lighten($grey, 10%);
-    .table {
+    .table-wrap {
         margin: 20px;
-        width: calc(100% - 40px);
-        /*display: block;*/
-        /*border: 1px solid red;*/
-        border-collapse: collapse;
-        /*border-spacing: 0;*/
-        td, th {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid $darkgrey;
-        }
-
-        &.bordered {
-            border: 1px solid $darkgrey;
+        position: relative;
+        .table {
+            width: 100%;
+            /*display: block;*/
+            /*border: 1px solid red;*/
+            border-collapse: collapse;
+            /*border-spacing: 0;*/
             td, th {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid $darkgrey;
+            }
+
+            &.bordered {
                 border: 1px solid $darkgrey;
+                td, th {
+                    border: 1px solid $darkgrey;
+                }
             }
-        }
-        &.compact {
-            td, th {
-                padding: 4px;
+            &.compact {
+                td, th {
+                    padding: 4px;
+                }
             }
-        }
-        &.striped {
-            tbody {
-                > tr {
-                    &:nth-child(even) {
-                        background: #eee;
-                        /*background: red;*/
+            &.striped {
+                tbody {
+                    > tr {
+                        &:nth-child(even) {
+                            background: #eee;
+                            /*background: red;*/
 
-                    }
-                    &:nth-child(odd) {
-                        background-color: #fff;
+                        }
+                        &:nth-child(odd) {
+                            background-color: #fff;
 
+                        }
                     }
                 }
+            }
+            .wrapper {
+                display: inline-flex;
+                /*justify-content: center;*/
+                align-items: center;
+                span:first-child {
+                    padding-right: 6px;
+                }
+                .sort-btns {
+                    display: inline-flex;
+                    flex-direction: column;
+                    cursor: pointer;
+                    svg {
+                        width: 10px;
+                        height: 10px;
+                        fill: $grey;
+                        &.active {
+                            fill: $blue
+                        }
+                    }
+                }
+            }
+
+        }
+        .loading-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0,0,0,0.2);
+            .loading {
+                /*animation: spin 1s infinite linear;*/
+                @include spin;
             }
         }
     }

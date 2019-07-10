@@ -5,84 +5,89 @@
 
         <!--<c-cascader :complete-source="source"></c-cascader>-->
         <!--<c-slides :selected.sync="selected" :reserve="reserve" :autoPlayDelay="2000">-->
-            <!--<c-slides-item name="1">-->
-                <!--<div class="box">1</div>-->
-            <!--</c-slides-item>-->
-            <!--<c-slides-item name="2">-->
-                <!--<div class="box">2</div>-->
-            <!--</c-slides-item>-->
-            <!--<c-slides-item name="3">-->
-                <!--<div class="box">3</div>-->
-            <!--</c-slides-item>-->
+        <!--<c-slides-item name="1">-->
+        <!--<div class="box">1</div>-->
+        <!--</c-slides-item>-->
+        <!--<c-slides-item name="2">-->
+        <!--<div class="box">2</div>-->
+        <!--</c-slides-item>-->
+        <!--<c-slides-item name="3">-->
+        <!--<div class="box">3</div>-->
+        <!--</c-slides-item>-->
         <!--</c-slides>-->
 
         <!--<div data-v-f42f38c8="" class="c-slides">-->
-            <!--<div data-v-f42f38c8="" class="c-slides-window">-->
-                <!--<div data-v-f42f38c8="" class="c-slides-wrapper">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div>-->
-            <!--</div>-->
-            <!--<div data-v-f42f38c8="" class="dot-wrap">-->
-                <!--<span data-v-f42f38c8="">-->
-                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
-                        <!--<use data-v-5cc1379a="" xlink:href="#icon-left"></use>-->
-                    <!--</svg>-->
-                <!--</span>-->
-                <!--<span data-v-f42f38c8="">-->
-                    <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
-                        <!--<use data-v-5cc1379a="" xlink:href="#icon-right"></use>-->
-                    <!--</svg>-->
-                <!--</span>-->
-            <!--</div>-->
+        <!--<div data-v-f42f38c8="" class="c-slides-window">-->
+        <!--<div data-v-f42f38c8="" class="c-slides-wrapper">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;</div>-->
+        <!--</div>-->
+        <!--<div data-v-f42f38c8="" class="dot-wrap">-->
+        <!--<span data-v-f42f38c8="">-->
+        <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
+        <!--<use data-v-5cc1379a="" xlink:href="#icon-left"></use>-->
+        <!--</svg>-->
+        <!--</span>-->
+        <!--<span data-v-f42f38c8="">-->
+        <!--<svg data-v-5cc1379a="" data-v-f42f38c8="" class="c-icon icon">-->
+        <!--<use data-v-5cc1379a="" xlink:href="#icon-right"></use>-->
+        <!--</svg>-->
+        <!--</span>-->
+        <!--</div>-->
         <!--</div>-->
         <!--<c-nav :active-items="activeItems" @update:activeItems="activeItems=$event" :multiple="false">-->
 
 
         <!--<c-nav :active-items.sync="activeItems" :vertical="false">-->
-            <!--<c-nav-item name="home">首页</c-nav-item>-->
-            <!--<c-sub-nav name="about">-->
-                <!--<template slot="title">关于</template>-->
+        <!--<c-nav-item name="home">首页</c-nav-item>-->
+        <!--<c-sub-nav name="about">-->
+        <!--<template slot="title">关于</template>-->
 
-                <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
-                <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
-                <!--<c-sub-nav name="contact">-->
-                    <!--<template slot="title">联系方式</template>-->
-                    <!--<c-nav-item name="qq">QQ</c-nav-item>-->
-                    <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
-                    <!--<c-sub-nav name="phone">-->
-                        <!--<template slot="title">手机号</template>-->
-                        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
-                        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
-                    <!--</c-sub-nav>-->
-                <!--</c-sub-nav>-->
-            <!--</c-sub-nav>-->
-            <!--<c-nav-item name="other">其他</c-nav-item>-->
+        <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
+        <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
+        <!--<c-sub-nav name="contact">-->
+        <!--<template slot="title">联系方式</template>-->
+        <!--<c-nav-item name="qq">QQ</c-nav-item>-->
+        <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
+        <!--<c-sub-nav name="phone">-->
+        <!--<template slot="title">手机号</template>-->
+        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
+        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
+        <!--</c-sub-nav>-->
+        <!--</c-sub-nav>-->
+        <!--</c-sub-nav>-->
+        <!--<c-nav-item name="other">其他</c-nav-item>-->
         <!--</c-nav>-->
 
         <!--<c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">-->
-            <!--<c-nav-item name="home">-->
-                <!--<a href="">首页</a>-->
-            <!--</c-nav-item>-->
-            <!--<c-sub-nav name="about">-->
-                <!--<template slot="title">关于</template>-->
+        <!--<c-nav-item name="home">-->
+        <!--<a href="">首页</a>-->
+        <!--</c-nav-item>-->
+        <!--<c-sub-nav name="about">-->
+        <!--<template slot="title">关于</template>-->
 
-                <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
-                <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
-                <!--<c-sub-nav name="contact">-->
-                    <!--<template slot="title">联系方式</template>-->
-                    <!--<c-nav-item name="qq">QQ</c-nav-item>-->
-                    <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
-                    <!--<c-sub-nav name="phone">-->
-                        <!--<template slot="title">手机号</template>-->
-                        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
-                        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
-                    <!--</c-sub-nav>-->
-                <!--</c-sub-nav>-->
-            <!--</c-sub-nav>-->
-            <!--<c-nav-item name="other">其他</c-nav-item>-->
+        <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
+        <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
+        <!--<c-sub-nav name="contact">-->
+        <!--<template slot="title">联系方式</template>-->
+        <!--<c-nav-item name="qq">QQ</c-nav-item>-->
+        <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
+        <!--<c-sub-nav name="phone">-->
+        <!--<template slot="title">手机号</template>-->
+        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
+        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
+        <!--</c-sub-nav>-->
+        <!--</c-sub-nav>-->
+        <!--</c-sub-nav>-->
+        <!--<c-nav-item name="other">其他</c-nav-item>-->
         <!--</c-nav>-->
 
         <c-table :columns="columns"
-                 :data-source="dataSource"
-                 :selected-table-items.sync="selectedTableItems"></c-table>
+                 :data-source.sync="dataSource"
+                 :selected-table-items.sync="selectedTableItems"
+                 :columns.sync="columns"
+                 @update:columns="order"
+                 :is-frontend-sort="isFrontendSort"
+                 :loading="loading"
+        ></c-table>
 
     </div>
 </template>
@@ -173,7 +178,7 @@
       'c-nav': CNav,
       'c-nav-item': CNavItem,
       'c-sub-nav': CSubNav,
-      'c-table':CTable
+      'c-table': CTable
     },
     data() {
       return {
@@ -181,17 +186,20 @@
         source,
         selected: '1',
         reserve: false,
-        activeItems:['home'],
-        columns:[
-          {text:'姓名',field:'name'},
-          {text:'分数',field:'score'},
+        activeItems: ['home'],
+        columns: [
+          { text: '姓名', field: 'name', openSort: true, sort: 'asc' },
+          { text: '分数', field: 'score', openSort: true, sort: 'asc' },
         ],
-        dataSource:[
-          {id:1,name:'CyrusFeng',score:100},
-          {id:2,name:'jack',score:90},
-          {id:3,name:'frank',score:80},
+        dataSource: [
+          { id: 1, name: 'CyrusFeng', score: 100 },
+          { id: 2, name: 'jack', score: 70 },
+          { id: 3, name: 'zzz', score: 80 },
+          { id: 4, name: 'frank', score: 80 },
         ],
-        selectedTableItems:[]
+        selectedTableItems: [],
+        isFrontendSort: true,
+        loading:false
       }
     },
     created() {
@@ -214,16 +222,38 @@
       loadData(lastItem, callback) {
         this.ajax(lastItem.id).then(callback)
       },
-      getChangeItem(obj){
-        if(obj.selected){
+      getChangeItem(obj) {
+        if (obj.selected) {
           this.selectedTableItem.push(obj.item)
-          console.log('add',this.selectedTableItem)
+          console.log('add', this.selectedTableItem)
 
-        }else{
-          this.selectedTableItem.splice(this.selectedTableItem.indexOf(obj.item),1)
-          console.log('delete',this.selectedTableItem)
+        } else {
+          this.selectedTableItem.splice(this.selectedTableItem.indexOf(obj.item), 1)
+          console.log('delete', this.selectedTableItem)
 
         }
+      },
+      order(columns) {
+        this.loading = true
+        columns.forEach((column) => {
+          if (column.openSort) {
+            setTimeout(() => {
+                this.loading = false
+            }, 1000)
+          }
+        })
+        // this.dataSource = this.dataSource.sort((a,b)=>a-b)
+      },
+      sortByKey(array, key, order) {
+        return array.sort((a, b) => {
+          let x = a[key];
+          let y = b[key];
+          if (order === 'asc') {
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+          } else if (order === 'desc') {
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+          }
+        });
       }
     }
 
