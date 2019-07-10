@@ -3,18 +3,18 @@
         <table class="table" :class="{bordered,compact,striped}">
             <thead>
             <tr>
-                <th><input type="checkbox" @change="onChangeAllItems"></th>
+                <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"></th>
                 <th v-if="numberVisible">#</th>
-                <th v-for="column in columns">{{column.text}}</th>
+                <th v-for="column in columns" :key="column.field">{{column.text}}</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item,index in dataSource">
-                <td><input type="checkbox" @change="onChangeItem($event,item,index)"
+            <tr v-for="item,index in dataSource" :key="item.id">
+                <td><input type="checkbox" @change="onChangeItem($event,item)"
                            :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
                 <td v-if="numberVisible">{{index+1}}</td>
                 <template v-for="column in columns">
-                    <td>{{item[column.field]}}</td>
+                    <td :key="column.field">{{item[column.field]}}</td>
                 </template>
             </tr>
             </tbody>
@@ -34,7 +34,7 @@
       },
       dataSource: {
         type: Array,
-        validator(array){
+        validator(array) {
           return array.filter(item => item.id === undefined).length <= 0;
         }
       },
@@ -62,15 +62,29 @@
     data() {
       return {}
     },
+    watch: {
+      selectedTableItems() {
+
+        if (this.selectedTableItems.length === this.dataSource.length) {
+          this.$refs.allChecked.indeterminate = false
+          this.$refs.allChecked.checked = true
+        } else if(this.selectedTableItems.length === 0){
+          this.$refs.allChecked.indeterminate = false
+          this.$refs.allChecked.checked = false
+        }else{
+          this.$refs.allChecked.indeterminate = true
+        }
+      }
+    },
     methods: {
-      onChangeItem(e, item, index) {
+      onChangeItem(e, item) {
         // console.log(e.target.checked)
         let copy = JSON.parse(JSON.stringify(this.selectedTableItems))
         let selected = e.target.checked
         if (selected) {
           copy.push(item)
         } else {
-          copy.splice(copy.indexOf(item), 1)
+          copy = copy.filter(i=>i.id !== item.id)
         }
         this.$emit('update:selectedTableItems', copy)
       },
