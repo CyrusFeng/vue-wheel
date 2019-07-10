@@ -11,6 +11,7 @@ module.exports = {
         children: [
           '../components/cascader.md',
           '../components/slides.md',
+          '../components/nav.md',
         ]
       },
     ]

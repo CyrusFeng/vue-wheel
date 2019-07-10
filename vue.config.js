@@ -130,7 +130,8 @@ module.exports = {
   css:{
     loaderOptions:{
       sass:{
-        includePaths:[path.join(__dirname,'style')]
+        includePaths:[path.join(__dirname,'style')],
+        // data:`@import "${path.join(__dirname,'style')}";`
       }
     }
   }

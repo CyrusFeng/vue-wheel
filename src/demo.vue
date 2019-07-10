@@ -36,49 +36,53 @@
         <!--<c-nav :active-items="activeItems" @update:activeItems="activeItems=$event" :multiple="false">-->
 
 
-        <c-nav :active-items.sync="activeItems" :vertical="false">
-            <c-nav-item name="home">首页</c-nav-item>
-            <c-sub-nav name="about">
-                <template slot="title">关于</template>
+        <!--<c-nav :active-items.sync="activeItems" :vertical="false">-->
+            <!--<c-nav-item name="home">首页</c-nav-item>-->
+            <!--<c-sub-nav name="about">-->
+                <!--<template slot="title">关于</template>-->
 
-                <c-nav-item name="culture">企业文化</c-nav-item>
-                <c-nav-item name="dev">开发团队</c-nav-item>
-                <c-sub-nav name="contact">
-                    <template slot="title">联系方式</template>
-                    <c-nav-item name="qq">QQ</c-nav-item>
-                    <c-nav-item name="wechat">WeChat</c-nav-item>
-                    <c-sub-nav name="phone">
-                        <template slot="title">手机号</template>
-                        <c-nav-item name="in">国内：111</c-nav-item>
-                        <c-nav-item name="out">国外：222</c-nav-item>
-                    </c-sub-nav>
-                </c-sub-nav>
-            </c-sub-nav>
-            <c-nav-item name="other">其他</c-nav-item>
-        </c-nav>
+                <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
+                <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
+                <!--<c-sub-nav name="contact">-->
+                    <!--<template slot="title">联系方式</template>-->
+                    <!--<c-nav-item name="qq">QQ</c-nav-item>-->
+                    <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
+                    <!--<c-sub-nav name="phone">-->
+                        <!--<template slot="title">手机号</template>-->
+                        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
+                        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
+                    <!--</c-sub-nav>-->
+                <!--</c-sub-nav>-->
+            <!--</c-sub-nav>-->
+            <!--<c-nav-item name="other">其他</c-nav-item>-->
+        <!--</c-nav>-->
 
-        <c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">
-            <c-nav-item name="home">
-                <a href="">首页</a>
-            </c-nav-item>
-            <c-sub-nav name="about">
-                <template slot="title">关于</template>
+        <!--<c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">-->
+            <!--<c-nav-item name="home">-->
+                <!--<a href="">首页</a>-->
+            <!--</c-nav-item>-->
+            <!--<c-sub-nav name="about">-->
+                <!--<template slot="title">关于</template>-->
 
-                <c-nav-item name="culture">企业文化</c-nav-item>
-                <c-nav-item name="dev">开发团队</c-nav-item>
-                <c-sub-nav name="contact">
-                    <template slot="title">联系方式</template>
-                    <c-nav-item name="qq">QQ</c-nav-item>
-                    <c-nav-item name="wechat">WeChat</c-nav-item>
-                    <c-sub-nav name="phone">
-                        <template slot="title">手机号</template>
-                        <c-nav-item name="in">国内：111</c-nav-item>
-                        <c-nav-item name="out">国外：222</c-nav-item>
-                    </c-sub-nav>
-                </c-sub-nav>
-            </c-sub-nav>
-            <c-nav-item name="other">其他</c-nav-item>
-        </c-nav>
+                <!--<c-nav-item name="culture">企业文化</c-nav-item>-->
+                <!--<c-nav-item name="dev">开发团队</c-nav-item>-->
+                <!--<c-sub-nav name="contact">-->
+                    <!--<template slot="title">联系方式</template>-->
+                    <!--<c-nav-item name="qq">QQ</c-nav-item>-->
+                    <!--<c-nav-item name="wechat">WeChat</c-nav-item>-->
+                    <!--<c-sub-nav name="phone">-->
+                        <!--<template slot="title">手机号</template>-->
+                        <!--<c-nav-item name="in">国内：111</c-nav-item>-->
+                        <!--<c-nav-item name="out">国外：222</c-nav-item>-->
+                    <!--</c-sub-nav>-->
+                <!--</c-sub-nav>-->
+            <!--</c-sub-nav>-->
+            <!--<c-nav-item name="other">其他</c-nav-item>-->
+        <!--</c-nav>-->
+
+        <c-table :columns="columns"
+                 :data-source="dataSource"
+                 :selected-table-items.sync="selectedTableItems"></c-table>
 
     </div>
 </template>
@@ -93,6 +97,7 @@
   import CNav from './components/nav/nav'
   import CNavItem from './components/nav/nav-item'
   import CSubNav from './components/nav/sub-nav'
+  import CTable from './components/c-table'
 
 
   var source = [
@@ -168,6 +173,7 @@
       'c-nav': CNav,
       'c-nav-item': CNavItem,
       'c-sub-nav': CSubNav,
+      'c-table':CTable
     },
     data() {
       return {
@@ -175,7 +181,17 @@
         source,
         selected: '1',
         reserve: false,
-        activeItems:['home']
+        activeItems:['home'],
+        columns:[
+          {text:'姓名',field:'name'},
+          {text:'分数',field:'score'},
+        ],
+        dataSource:[
+          {id:1,name:'CyrusFeng',score:100},
+          {id:2,name:'jack',score:90},
+          {id:3,name:'frank',score:80},
+        ],
+        selectedTableItems:[]
       }
     },
     created() {
@@ -198,6 +214,17 @@
       loadData(lastItem, callback) {
         this.ajax(lastItem.id).then(callback)
       },
+      getChangeItem(obj){
+        if(obj.selected){
+          this.selectedTableItem.push(obj.item)
+          console.log('add',this.selectedTableItem)
+
+        }else{
+          this.selectedTableItem.splice(this.selectedTableItem.indexOf(obj.item),1)
+          console.log('delete',this.selectedTableItem)
+
+        }
+      }
     }
 
   }

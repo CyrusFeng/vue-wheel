@@ -58,7 +58,8 @@
     }
     a{
         color: inherit;
-        text-decoration: none;
+        text-decoration: none !important;
+        font-weight: normal;
     }
 }
     .c-nav-wrap .sub-nav-wrap .nav-item-wrap {
