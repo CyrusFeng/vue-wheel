@@ -1,33 +1,36 @@
 <template>
-    <div class="table-wrap">
-        <table class="table" :class="{bordered,compact,striped}">
-            <thead>
-            <tr>
-                <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected">
-                </th>
-                <th v-if="numberVisible">#</th>
-                <th v-for="column in columns" :key="column.field">
-                    <div class="wrapper">
-                        <span>{{column.text}}</span>
-                        <span class="sort-btns" @click="sort(column)" v-if="column.openSort">
+    <div class="table-component-wrap" ref="tableWrapper">
+        <div class="table-wrap" :style="{height}">
+            <table class="table" :class="{bordered,compact,striped}" ref="table">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"
+                               :checked="areAllItemsSelected">
+                    </th>
+                    <th v-if="numberVisible">#</th>
+                    <th v-for="column in columns" :key="column.field">
+                        <div class="wrapper">
+                            <span>{{column.text}}</span>
+                            <span class="sort-btns" @click="sort(column)" v-if="column.openSort">
                             <c-icon :class="{active:column.sort==='asc'}" name="asc"></c-icon>
                             <c-icon :class="{active:column.sort==='desc'}" name="desc"></c-icon>
                         </span>
-                    </div>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(item,index) in dataSource" :key="item.id">
-                <td><input type="checkbox" @change="onChangeItem($event,item)"
-                           :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
-                <td v-if="numberVisible">{{index+1}}</td>
-                <template v-for="column in columns">
-                    <td :key="column.field">{{item[column.field]}}</td>
-                </template>
-            </tr>
-            </tbody>
-        </table>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in dataSource" :key="item.id">
+                    <td><input type="checkbox" @change="onChangeItem($event,item)"
+                               :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
+                    <td v-if="numberVisible">{{index+1}}</td>
+                    <template v-for="column in columns">
+                        <td :key="column.field">{{item[column.field]}}</td>
+                    </template>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="loading-wrap" v-if="loading&&!isFrontendSort">
             <c-icon name="loading" class="loading"></c-icon>
         </div>
@@ -80,12 +83,18 @@
       isFrontendSort: {
         type: Boolean
       },
-      loading:{
-        type:Boolean
+      loading: {
+        type: Boolean
+      },
+      height: {
+        type: [String, Number]
       }
     },
     data() {
-      return {}
+      return {
+        table2:null,
+        onWindowResize:null
+      }
     },
     computed: {
       areAllItemsSelected() {
@@ -130,6 +139,25 @@
         immediate: true
       }
     },
+    mounted() {
+      this.table2 = this.$refs.table.cloneNode(true)
+      this.table2.classList.add('table-copy')
+
+      this.updateTheadThWidth()
+
+      this.$refs.tableWrapper.appendChild(this.table2)
+
+      this.onWindowResize = ()=>{
+        this.updateTheadThWidth()
+      }
+      window.addEventListener('resize',this.onWindowResize)
+    },
+    beforeDestroy(){
+      window.removeEventListener('resize',this.onWindowResize)
+      this.table2.remove()
+      this.table2 = null
+    },
+
     methods: {
       onChangeItem(e, item) {
         // console.log(e.target.checked)
@@ -164,7 +192,7 @@
           }
         })
         this.$emit('update:columns', copy)
-        if(this.isFrontendSort){
+        if (this.isFrontendSort) {
           this.order(copy)
         }
       },
@@ -188,6 +216,29 @@
             return ((x > y) ? -1 : ((x < y) ? 1 : 0));
           }
         });
+      },
+      updateTheadThWidth(){
+        let tableHead = Array.from(this.$refs.table.children).filter(item=>{
+          return item.tagName.toLowerCase() === 'thead'
+        })[0]
+
+        // let tableHead2 = Array.from(table2.children).filter(item=>item.tagName.toLowerCase() === 'thead')[0]
+        let tableHead2
+        Array.from(this.table2.children).map(node => {
+          if (node.tagName.toLowerCase() !== 'thead') {
+            node.remove()
+          }else{
+            tableHead2 = node
+            // console.log(tableHead2)
+          }
+        })
+
+        Array.from(tableHead2.children[0].children).forEach((th,index)=>{
+          if(index === Array.from(tableHead2.children[0].children).length-1){
+            return
+          }
+          th.style.width = tableHead.children[0].children[index].getBoundingClientRect().width +'px'
+        })
       }
     }
   }
@@ -198,15 +249,20 @@
 
     $darkgrey: darken($grey, 10%);
     $lightgrey: lighten($grey, 10%);
-    .table-wrap {
-        margin: 20px;
+    .table-component-wrap{
+        margin: 0 20px;
         position: relative;
-        .table {
+    }
+    .table-wrap {
+        overflow: auto;
+        table {
             width: 100%;
             /*display: block;*/
             /*border: 1px solid red;*/
             border-collapse: collapse;
             /*border-spacing: 0;*/
+            overflow: auto;
+            background: #fff;
             td, th {
                 padding: 8px;
                 text-align: left;
@@ -262,20 +318,89 @@
             }
 
         }
-        .loading-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0,0,0,0.2);
-            .loading {
-                /*animation: spin 1s infinite linear;*/
-                @include spin;
+    }
+    table {
+        width: 100%;
+        /*display: block;*/
+        /*border: 1px solid red;*/
+        border-collapse: collapse;
+        /*border-spacing: 0;*/
+        overflow: auto;
+        background-color: #fff;
+        td, th {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid $darkgrey;
+        }
+
+        &.bordered {
+            border: 1px solid $darkgrey;
+            td, th {
+                border: 1px solid $darkgrey;
             }
+        }
+        &.compact {
+            td, th {
+                padding: 4px;
+            }
+        }
+        &.striped {
+            tbody {
+                > tr {
+                    &:nth-child(even) {
+                        background: #eee;
+                        /*background: red;*/
+
+                    }
+                    &:nth-child(odd) {
+                        background-color: #fff;
+
+                    }
+                }
+            }
+        }
+        .wrapper {
+            display: inline-flex;
+            /*justify-content: center;*/
+            align-items: center;
+            span:first-child {
+                padding-right: 6px;
+            }
+            .sort-btns {
+                display: inline-flex;
+                flex-direction: column;
+                cursor: pointer;
+                svg {
+                    width: 10px;
+                    height: 10px;
+                    fill: $grey;
+                    &.active {
+                        fill: $blue
+                    }
+                }
+            }
+        }
+
+    }
+    .table-copy {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .loading-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        .loading {
+            /*animation: spin 1s infinite linear;*/
+            @include spin;
         }
     }
 </style>

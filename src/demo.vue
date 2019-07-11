@@ -87,7 +87,7 @@
                  @update:columns="order"
                  :is-frontend-sort="isFrontendSort"
                  :loading="loading"
-        ></c-table>
+                 height="100px"></c-table>
 
     </div>
 </template>
