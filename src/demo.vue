@@ -87,7 +87,7 @@
                  @update:columns="order"
                  :is-frontend-sort="isFrontendSort"
                  :loading="loading"
-                 height="100px"></c-table>
+                 height="300"></c-table>
 
     </div>
 </template>
@@ -188,7 +188,7 @@
         reserve: false,
         activeItems: ['home'],
         columns: [
-          { text: '姓名', field: 'name', openSort: true, sort: 'asc' },
+          { text: '姓名', field: 'name', openSort: true, sort: 'asc' ,width:150},
           { text: '分数', field: 'score', openSort: true, sort: 'asc' },
         ],
         dataSource: [
@@ -196,6 +196,16 @@
           { id: 2, name: 'jack', score: 70 },
           { id: 3, name: 'zzz', score: 80 },
           { id: 4, name: 'frank', score: 80 },
+          { id: 5, name: 'drank', score: 80 },
+          { id: 6, name: 'hrank', score: 80 },
+          { id: 7, name: 'brank', score: 80 },
+          { id: 8, name: 'brank', score: 80 },
+          { id: 9, name: 'trank', score: 80 },
+          { id: 10, name: 'nrank', score: 80 },
+          { id: 11, name: 'nrank', score: 80 },
+          { id: 12, name: 'nrank', score: 80 },
+          { id: 13, name: 'nrank', score: 80 },
+          { id: 14, name: 'nrank', score: 80 },
         ],
         selectedTableItems: [],
         isFrontendSort: true,

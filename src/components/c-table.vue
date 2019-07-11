@@ -1,6 +1,6 @@
 <template>
-    <div class="table-component-wrap" ref="tableWrapper">
-        <div class="table-wrap" :style="{height}">
+    <div class="table-component-wrap" ref="tableComponentWrap">
+        <div class="table-wrap" :style="{height:height+'px'}" ref="tableWrap">
             <table class="table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
@@ -144,10 +144,11 @@
       this.table2.classList.add('table-copy')
         let thead = this.$refs.table.children[0]
       let {height} = thead.getBoundingClientRect()
-      this.$refs.table.style.marginTop = height +'px'
+      this.$refs.tableWrap.style.marginTop = height +'px'
+      this.$refs.tableWrap.style.height = this.height - height +'px'
       this.table2.appendChild(this.$refs.table.children[0])
         console.log(this.table2)
-      this.$refs.tableWrapper.appendChild(this.table2)
+      this.$refs.tableComponentWrap.appendChild(this.table2)
       // this.updateTheadThWidth()
       // this.onWindowResize = ()=>{
       //   this.updateTheadThWidth()
@@ -155,9 +156,9 @@
       // window.addEventListener('resize',this.onWindowResize)
     },
     beforeDestroy(){
-      window.removeEventListener('resize',this.onWindowResize)
-      this.table2.remove()
-      this.table2 = null
+      // window.removeEventListener('resize',this.onWindowResize)
+      // this.table2.remove()
+      // this.table2 = null
     },
 
     methods: {
@@ -255,6 +256,7 @@
     .table-component-wrap{
         margin: 0 20px;
         position: relative;
+        overflow: auto;
     }
     .table-wrap {
         overflow: auto;
