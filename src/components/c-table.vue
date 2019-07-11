@@ -4,11 +4,11 @@
             <table class="table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
-                    <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"
+                    <th style="width:50px"><input type="checkbox" @change="onChangeAllItems" ref="allChecked"
                                :checked="areAllItemsSelected">
                     </th>
-                    <th v-if="numberVisible">#</th>
-                    <th v-for="column in columns" :key="column.field">
+                    <th style="width:50px" v-if="numberVisible">#</th>
+                    <th :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field">
                         <div class="wrapper">
                             <span>{{column.text}}</span>
                             <span class="sort-btns" @click="sort(column)" v-if="column.openSort">
@@ -21,11 +21,11 @@
                 </thead>
                 <tbody>
                 <tr v-for="(item,index) in dataSource" :key="item.id">
-                    <td><input type="checkbox" @change="onChangeItem($event,item)"
+                    <td style="width:50px"><input type="checkbox" @change="onChangeItem($event,item)"
                                :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
-                    <td v-if="numberVisible">{{index+1}}</td>
+                    <td style="width:50px" v-if="numberVisible">{{index+1}}</td>
                     <template v-for="column in columns">
-                        <td :key="column.field">{{item[column.field]}}</td>
+                        <td :style="{width:column.width+'px'}" :key="column.field">{{item[column.field]}}</td>
                     </template>
                 </tr>
                 </tbody>
@@ -140,17 +140,19 @@
       }
     },
     mounted() {
-      this.table2 = this.$refs.table.cloneNode(true)
+      this.table2 = this.$refs.table.cloneNode(false)
       this.table2.classList.add('table-copy')
-
-      this.updateTheadThWidth()
-
+        let thead = this.$refs.table.children[0]
+      let {height} = thead.getBoundingClientRect()
+      this.$refs.table.style.marginTop = height +'px'
+      this.table2.appendChild(this.$refs.table.children[0])
+        console.log(this.table2)
       this.$refs.tableWrapper.appendChild(this.table2)
-
-      this.onWindowResize = ()=>{
-        this.updateTheadThWidth()
-      }
-      window.addEventListener('resize',this.onWindowResize)
+      // this.updateTheadThWidth()
+      // this.onWindowResize = ()=>{
+      //   this.updateTheadThWidth()
+      // }
+      // window.addEventListener('resize',this.onWindowResize)
     },
     beforeDestroy(){
       window.removeEventListener('resize',this.onWindowResize)
@@ -217,29 +219,30 @@
           }
         });
       },
-      updateTheadThWidth(){
-        let tableHead = Array.from(this.$refs.table.children).filter(item=>{
-          return item.tagName.toLowerCase() === 'thead'
-        })[0]
-
-        // let tableHead2 = Array.from(table2.children).filter(item=>item.tagName.toLowerCase() === 'thead')[0]
-        let tableHead2
-        Array.from(this.table2.children).map(node => {
-          if (node.tagName.toLowerCase() !== 'thead') {
-            node.remove()
-          }else{
-            tableHead2 = node
-            // console.log(tableHead2)
-          }
-        })
-
-        Array.from(tableHead2.children[0].children).forEach((th,index)=>{
-          if(index === Array.from(tableHead2.children[0].children).length-1){
-            return
-          }
-          th.style.width = tableHead.children[0].children[index].getBoundingClientRect().width +'px'
-        })
-      }
+      // updateTheadThWidth(){
+      //   let tableHead = Array.from(this.$refs.table.children).filter(item=>{
+      //     return item.tagName.toLowerCase() === 'thead'
+      //   })[0]
+      //
+      //   // let tableHead2 = Array.from(table2.children).filter(item=>item.tagName.toLowerCase() === 'thead')[0]
+      //   let tableHead2
+      //   Array.from(this.table2.children).map(node => {
+      //     if (node.tagName.toLowerCase() !== 'thead') {
+      //       node.remove()
+      //     }else{
+      //       tableHead2 = node
+      //       // console.log(tableHead2)
+      //     }
+      //   })
+      //
+      //   Array.from(tableHead2.children[0].children).forEach((th,index)=>{
+      //     if(index === Array.from(tableHead2.children[0].children).length-1){
+      //       return
+      //     }
+      //     console.log(tableHead)
+      //     th.style.width = tableHead.children[0].children[index].getBoundingClientRect().width +'px'
+      //   })
+      // }
     }
   }
 </script>
