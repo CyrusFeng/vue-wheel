@@ -108,13 +108,13 @@
 
 <style scoped lang="scss">
     .wrapper {
-        padding: 20px;
+        /*padding: 20px;*/
         margin: 50px;
 
         display: inline-block;
         vertical-align: middle;
         position: relative;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
 
         .position-left {
             //transform: translateX(-100%);
@@ -129,11 +129,15 @@
         /*bottom: 100%;*/
         /*left: 0;*/
         /*transform: translateY(-100%);*/
-        border: 1px solid red;
+        font-size: 16px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
+        background: #fff;
         padding: .5em 1em;
         max-width: 20em;
         word-break: break-all;
-        font-size: 16px;
         &::after, &::before {
             content: '';
             display: block;
@@ -216,8 +220,19 @@
     }
 
     .btn {
-        display: inline-block;
-        border: 1px solid red;
+        /*display: inline-block;*/
+        /*border: 1px solid red;*/
+
+        font-size: 14px;
+        height: 32px;
+        padding: 0 1em;
+        border-radius: 4px;
+        border: 1px solid #999;
+        background: #fff;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
     }
 
 </style>

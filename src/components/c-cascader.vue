@@ -2,8 +2,9 @@
     <div class="cascader-wrap" ref="cascader" v-click-outside="close">
         <!--<div class="input-wrap" @click.stop="toggle">-->
         <div class="input-wrap" @click="toggle">
-            <input type="text" :value="result">
-            <c-icon class="icon" name="cancel" @click="cancel"></c-icon>
+            <!--<input type="text" :value="result">-->
+            <span>{{result || '&nbsp;'}}</span>
+            <c-icon class="icon" name="cancel" @click="cancel" v-if="result"></c-icon>
         </div>
         <div class="popover" v-if="popoverVisible">
             <g-cascader-item :load-data="loadData"
@@ -110,6 +111,19 @@
         input {
             padding: 0.1rem;
             font-size: 0.12rem;
+        }
+        span{
+            display: inline-flex;
+            min-width: 12em;
+            background: #fff;
+            height: 32px;
+            align-items: center;
+            padding: 0 1em;
+            /*border: 1px solid #999;*/
+            border-radius: 4px;
+        }
+        .icon{
+            margin-right: 12px;
         }
     }
 

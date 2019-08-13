@@ -102,8 +102,9 @@
         height: 100%;
         padding: 0.3em 0;
         overflow: auto;
+        border: 1px solid #eee;
         li{
-            /*padding: .5em 1em;*/
+            padding: .5em 1em;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -113,10 +114,11 @@
             }
             span{
                 /*margin-right: 1em;*/
-                padding: 0.5em 1em;
+                /*padding: 0.5em 1em;*/
+                margin-right: 1em;
                 display: flex;
                 align-items: center;
-                min-width: 5em;
+                /*min-width: 5em;*/
                 user-select: none;
                 white-space: nowrap;
             }

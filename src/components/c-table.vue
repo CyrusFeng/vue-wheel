@@ -277,6 +277,7 @@
             /*border-spacing: 0;*/
             overflow: auto;
             background: #fff;
+            width: 100%;
             td, th {
                 padding: 8px;
                 text-align: left;
