@@ -87,8 +87,40 @@
                  @update:columns="order"
                  :is-frontend-sort="isFrontendSort"
                  :loading="loading"
-                 height="300"></c-table>
+                 height="300">
+            <template slot-scope="item">
+                <a href="" @click="edit(item)">编辑</a>
+            </template>
+        </c-table>
 
+        <c-pagination :totalPage="totalPage" :currentPage="currentPage" @update:currentPage="getCurrentPage"></c-pagination>
+        <!--<c-popover position="left" event-type="click">点击-->
+            <!--<template name="pop">出现</template>-->
+        <!--</c-popover>-->
+        <c-popover position="left" event-type="click">
+           弹出
+            <template slot="pop">
+                弹出内容
+            </template>
+        </c-popover>
+        <c-popover position="top" event-type="hover">
+            弹出
+            <template slot="pop">
+                弹出内容
+            </template>
+        </c-popover>
+        <c-popover position="right" event-type="click">
+            弹出
+            <template slot="pop">
+                弹出内容
+            </template>
+        </c-popover>
+        <c-popover position="bottom" event-type="hover">
+            弹出
+            <template slot="pop">
+                弹出内容
+            </template>
+        </c-popover>
     </div>
 </template>
 
@@ -103,6 +135,9 @@
   import CNavItem from './components/nav/nav-item'
   import CSubNav from './components/nav/sub-nav'
   import CTable from './components/c-table'
+  import CPagination from './components/pagination'
+
+  import CPopover from './components/c-popover'
 
 
   var source = [
@@ -178,7 +213,9 @@
       'c-nav': CNav,
       'c-nav-item': CNavItem,
       'c-sub-nav': CSubNav,
-      'c-table': CTable
+      'c-table': CTable,
+      'c-pagination':CPagination,
+      'c-popover':CPopover
     },
     data() {
       return {
@@ -189,7 +226,7 @@
         activeItems: ['home'],
         columns: [
           { text: '姓名', field: 'name', openSort: true, sort: 'asc' ,width:150},
-          { text: '分数', field: 'score', openSort: true, sort: 'asc' },
+          { text: '分数', field: 'score', openSort: true, sort: 'asc' ,width:150},
         ],
         dataSource: [
           { id: 1, name: 'CyrusFeng', score: 100 },
@@ -209,7 +246,10 @@
         ],
         selectedTableItems: [],
         isFrontendSort: true,
-        loading:false
+        loading:false,
+
+        currentPage:1,
+        totalPage:10,
       }
     },
     created() {
@@ -264,6 +304,12 @@
             return ((x > y) ? -1 : ((x < y) ? 1 : 0));
           }
         });
+      },
+      edit(item){
+
+      },
+      getCurrentPage($event){
+        this.currentPage = $event
       }
     }
 

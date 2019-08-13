@@ -4,6 +4,7 @@
             <table class="table" :class="{bordered,compact,striped}" ref="table">
                 <thead>
                 <tr>
+                    <!--<th style="width:50px"></th>-->
                     <th style="width:50px"><input type="checkbox" @change="onChangeAllItems" ref="allChecked"
                                :checked="areAllItemsSelected">
                     </th>
@@ -17,16 +18,23 @@
                         </span>
                         </div>
                     </th>
+                    <th style="width:50px"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(item,index) in dataSource" :key="item.id">
+                    <!--<th style="width:50px">-->
+                        <!--<c-icon class="expend-icon" name="right"></c-icon>-->
+                    <!--</th>-->
                     <td style="width:50px"><input type="checkbox" @change="onChangeItem($event,item)"
                                :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
                     <td style="width:50px" v-if="numberVisible">{{index+1}}</td>
                     <template v-for="column in columns">
                         <td :style="{width:column.width+'px'}" :key="column.field">{{item[column.field]}}</td>
                     </template>
+                    <td style="width:50px">
+                        <slot :item="item"></slot>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -154,6 +162,7 @@
       //   this.updateTheadThWidth()
       // }
       // window.addEventListener('resize',this.onWindowResize)
+      // console.log(this.$scopedSlots)
     },
     beforeDestroy(){
       // window.removeEventListener('resize',this.onWindowResize)
@@ -261,7 +270,7 @@
     .table-wrap {
         overflow: auto;
         table {
-            width: 100%;
+            /*width: 100%;*/
             /*display: block;*/
             /*border: 1px solid red;*/
             border-collapse: collapse;
@@ -275,7 +284,7 @@
             }
 
             &.bordered {
-                border: 1px solid $darkgrey;
+                /* border: 1px solid $darkgrey; */
                 td, th {
                     border: 1px solid $darkgrey;
                 }
@@ -325,7 +334,7 @@
         }
     }
     table {
-        width: 100%;
+        /*width: 100%;*/
         /*display: block;*/
         /*border: 1px solid red;*/
         border-collapse: collapse;
@@ -339,7 +348,7 @@
         }
 
         &.bordered {
-            border: 1px solid $darkgrey;
+            /*border: 1px solid $darkgrey;*/
             td, th {
                 border: 1px solid $darkgrey;
             }
@@ -407,5 +416,9 @@
             /*animation: spin 1s infinite linear;*/
             @include spin;
         }
+    }
+    .expend-icon{
+        width: 10px;
+        height: 10px;
     }
 </style>

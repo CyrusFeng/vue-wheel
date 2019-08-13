@@ -9,9 +9,13 @@ module.exports = {
         title: 'components',
         collapsable: false,
         children: [
-          '../components/cascader.md',
+
           '../components/slides.md',
           '../components/nav.md',
+          '../components/table.md',
+          '../components/pagination.md',
+          '../components/popover.md',
+          '../components/cascader.md',
         ]
       },
     ]
