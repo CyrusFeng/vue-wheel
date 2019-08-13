@@ -121,6 +121,24 @@
                 弹出内容
             </template>
         </c-popover>
+        <div>
+            <c-tabs :selected.sync="selectedTab">
+                <c-tabs-nav>
+                    <c-tabs-nav-item name="tab1">
+                        <c-icon name="setting" class="tabs-icon"></c-icon>
+                        体育
+                    </c-tabs-nav-item>
+                    <c-tabs-nav-item name="tab2">财经</c-tabs-nav-item>
+                    <!--<div class="icon" slot="extra">我是图标</div>-->
+                    <c-icon name="setting" class="tabs-icon" slot="extra"></c-icon>
+
+                </c-tabs-nav>
+                <c-tabs-content>
+                    <c-tabs-content-item name="tab1">体育文章</c-tabs-content-item>
+                    <c-tabs-content-item name="tab2">财经文章</c-tabs-content-item>
+                </c-tabs-content>
+            </c-tabs>
+        </div>
     </div>
 </template>
 
@@ -134,6 +152,11 @@
   import CNav from './components/nav/nav'
   import CNavItem from './components/nav/nav-item'
   import CSubNav from './components/nav/sub-nav'
+  import Tabs from './components/tab/c-tabs'
+  import TabsNav from './components/tab/c-tabs-nav'
+  import TabsNavItem from './components/tab/c-tabs-nav-item'
+  import TabsContent from './components/tab/c-tabs-content'
+  import TabsContentItem from './components/tab/c-tabs-content-item'
   import CTable from './components/c-table'
   import CPagination from './components/pagination'
 
@@ -215,7 +238,12 @@
       'c-sub-nav': CSubNav,
       'c-table': CTable,
       'c-pagination':CPagination,
-      'c-popover':CPopover
+      'c-popover':CPopover,
+      'c-tabs':Tabs,
+      'c-tabs-nav':TabsNav,
+      'c-tabs-nav-item':TabsNavItem,
+      'c-tabs-content':TabsContent,
+      'c-tabs-content-item':TabsContentItem,
     },
     data() {
       return {
@@ -250,6 +278,7 @@
 
         currentPage:1,
         totalPage:10,
+        selectedTab:'tab1',//tabs
       }
     },
     created() {
@@ -328,5 +357,8 @@
         width: 100%;
         height: 300px;
         background-color: #666666;
+    }
+    .tabs-icon{
+        margin-right: 8px;
     }
 </style>

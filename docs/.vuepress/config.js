@@ -16,6 +16,7 @@ module.exports = {
           '../components/pagination.md',
           '../components/popover.md',
           '../components/cascader.md',
+          '../components/tabs.md',
         ]
       },
     ]
