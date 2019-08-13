@@ -17,6 +17,7 @@ module.exports = {
           '../components/popover.md',
           '../components/cascader.md',
           '../components/tabs.md',
+          '../components/toast.md',
         ]
       },
     ]

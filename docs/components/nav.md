@@ -5,5 +5,6 @@ sidebarDepth: 2
 
 <ClientOnly>
   <nav-demo></nav-demo>
+  <nav-demo2></nav-demo2>
 </ClientOnly>
 

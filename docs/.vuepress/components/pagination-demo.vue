@@ -1,8 +1,16 @@
 <template>
     <div class="container">
+        <h2>支持设置当前页、总页数、省略显示</h2>
+        <p>
+            <strong>预览：</strong>
+        </p>
         <div class="wrap">
-            <c-pagination :totalPage="totalPage" :currentPage="currentPage" @update:currentPage="getCurrentPage"></c-pagination>
+            <c-pagination :totalPage="totalPage" :currentPage="currentPage"
+                          @update:currentPage="getCurrentPage"></c-pagination>
         </div>
+        <p>
+            <strong>代码：</strong>
+        </p>
         <pre><code>{{code}}</code></pre>
     </div>
 </template>
@@ -19,12 +27,12 @@
     data() {
       return {
         code: `<c-pagination :totalPage="totalPage" :currentPage="currentPage" @update:currentPage="getCurrentPage"></c-pagination>`,
-        currentPage:1,
-        totalPage:10,
+        currentPage: 1,
+        totalPage: 10,
       }
     },
-    methods:{
-      getCurrentPage($event){
+    methods: {
+      getCurrentPage($event) {
         this.currentPage = $event
       }
     },
@@ -32,10 +40,7 @@
 </script>
 
 <style scoped lang="scss">
-.container{
-    font-size: 16px;
-}
-* {
-    font-size: 16px;
-}
+    .container {
+        /*font-size: 16px;*/
+    }
 </style>

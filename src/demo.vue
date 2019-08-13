@@ -139,6 +139,11 @@
                 </c-tabs-content>
             </c-tabs>
         </div>
+        <div>
+            <button @click="$toast('点击弹出提示')">上方弹出</button>
+            <button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</button>
+            <button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</button>
+        </div>
     </div>
 </template>
 
@@ -161,6 +166,8 @@
   import CPagination from './components/pagination'
 
   import CPopover from './components/c-popover'
+  // import toastPlugin from './components/toast/toastPlugin'
+  // Vue.use(toastPlugin)
 
 
   var source = [
@@ -360,5 +367,8 @@
     }
     .tabs-icon{
         margin-right: 8px;
+    }
+    .toast-wrap{
+        z-index: 10;
     }
 </style>

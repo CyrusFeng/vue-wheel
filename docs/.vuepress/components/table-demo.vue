@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <h2>支持固定表头、多选、可设置前端排序或服务端排序</h2>
+        <p>
+            <strong>预览：</strong>
+        </p>
         <div class="wrap">
             <c-table :columns="columns"
                      :data-source.sync="dataSource"
@@ -14,6 +18,9 @@
                 </template>
             </c-table>
         </div>
+        <p>
+            <strong>代码：</strong>
+        </p>
         <pre><code>{{code}}</code></pre>
     </div>
 </template>
@@ -72,10 +79,11 @@
 
 <style scoped lang="scss">
     .container{
-        font-size: 16px;
+        /*font-size: 16px;*/
         .wrap{
             font-size: 16px;
             table{
+                margin: 0;
                 td,th{
                     font-size: 16px;
                 }
@@ -83,11 +91,8 @@
         }
         pre{
             code{
-                font-size: 16px;
+                font-size: 14px;
             }
         }
-    }
-    * {
-        font-size: 16px;
     }
 </style>

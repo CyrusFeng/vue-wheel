@@ -97,6 +97,7 @@
 
 <style scoped lang="scss">
     @import "../style_var.scss";
+
     .cascader-wrap{
         display: inline-block;
         vertical-align: top;

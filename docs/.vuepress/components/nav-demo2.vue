@@ -1,12 +1,14 @@
 <template>
     <div class="container">
-        <h2>横向</h2>
+        <h2>纵向</h2>
         <p>
             <strong>预览：</strong>
         </p>
         <div class="wrap">
-            <c-nav :active-items.sync="activeItems" :vertical="false" class="first">
-                <c-nav-item name="home">首页</c-nav-item>
+            <c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">
+                <c-nav-item name="home">
+                    <a href="">首页</a>
+                </c-nav-item>
                 <c-sub-nav name="about">
                     <template slot="title">关于</template>
 
@@ -47,8 +49,10 @@
     data() {
       return {
         activeItems:['home'],
-        code:`<c-nav :active-items.sync="activeItems" :vertical="false">
-    <c-nav-item name="home">首页</c-nav-item>
+        code:`<c-nav :active-items.sync="activeItems" :vertical="true" style="width: 8em;">
+    <c-nav-item name="home">
+        <a href="">首页</a>
+    </c-nav-item>
     <c-sub-nav name="about">
         <template slot="title">关于</template>
         <c-nav-item name="culture">企业文化</c-nav-item>

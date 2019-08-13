@@ -273,6 +273,7 @@
             /*width: 100%;*/
             /*display: block;*/
             /*border: 1px solid red;*/
+            margin: 0;
             border-collapse: collapse;
             /*border-spacing: 0;*/
             overflow: auto;
@@ -338,6 +339,7 @@
         /*width: 100%;*/
         /*display: block;*/
         /*border: 1px solid red;*/
+        margin: 0;
         border-collapse: collapse;
         /*border-spacing: 0;*/
         overflow: auto;

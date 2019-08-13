@@ -110,6 +110,9 @@
         .sub-title {
             display: block;
             padding: 10px 20px;
+            font-size: $font-size;
+            margin: 0 !important;
+            line-height: normal !important;
             > .icon-wrap {
                 display: none;
             }

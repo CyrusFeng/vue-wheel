@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <h2>支持图标</h2>
+        <p>
+            <strong>预览：</strong>
+        </p>
         <div class="wrap">
             <c-tabs :selected.sync="selectedTab">
                 <c-tabs-nav>
@@ -17,6 +21,9 @@
                 </c-tabs-content>
             </c-tabs>
         </div>
+        <p>
+            <strong>代码：</strong>
+        </p>
         <pre><code>{{code}}</code></pre>
     </div>
 </template>
@@ -61,20 +68,17 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
     .container{
-        font-size: 16px;
+        /*font-size: 16px;*/
         .wrap{
             font-size: 16px;
         }
         pre{
             code{
-                font-size: 16px;
+                font-size: 14px;
             }
         }
-    }
-    * {
-        font-size: 16px;
     }
     .tabs-icon{
         margin-right: 8px;

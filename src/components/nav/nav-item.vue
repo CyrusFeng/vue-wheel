@@ -37,7 +37,7 @@
 .nav-item-wrap{
     padding: 10px 20px;
     position: relative;
-    /*<!--font-size: $font-size;-->*/
+    font-size: $font-size;
     /*<!--color: $light-color;-->*/
     &:not(.vertical){
         &.active{

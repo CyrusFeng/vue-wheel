@@ -126,6 +126,7 @@
 
     .pop-wrapper {
         position: absolute;
+        z-index: 10;
         /*bottom: 100%;*/
         /*left: 0;*/
         /*transform: translateY(-100%);*/

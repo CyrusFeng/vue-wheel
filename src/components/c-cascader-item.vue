@@ -103,6 +103,10 @@
         padding: 0.3em 0;
         overflow: auto;
         border: 1px solid #eee;
+        ul{
+            margin: 0;
+            padding: 0;
+        }
         li{
             padding: .5em 1em;
             display: flex;
