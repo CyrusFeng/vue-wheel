@@ -59,6 +59,8 @@
         }
       },
       hiddenPop(e) {
+        console.log(this.$refs.triggerWrap.contains(e.target))
+        console.log(this.$refs.popWrapper.contains(e.target))
         if (this.$refs.triggerWrap.contains(e.target) || this.$refs.popWrapper.contains(e.target)) {
           console.log('什么都不做')
         } else {
@@ -109,7 +111,7 @@
 <style scoped lang="scss">
     .wrapper {
         /*padding: 20px;*/
-        margin: 50px;
+        /*margin: 50px;*/
 
         display: inline-block;
         vertical-align: middle;
@@ -226,9 +228,9 @@
 
         font-size: 14px;
         height: 32px;
-        padding: 0 1em;
+        /*padding: 0 1em;*/
         border-radius: 4px;
-        border: 1px solid #999;
+        /*border: 1px solid #999;*/
         background: #fff;
         display: inline-flex;
         justify-content: center;

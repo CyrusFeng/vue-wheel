@@ -144,11 +144,26 @@
             <button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</button>
             <button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</button>
         </div>
+
+        <!--<c-uploader action="http://127.0.0.1:3000/upload" name="file" :fileList.sync="fileList">-->
+        <!--<c-uploader action="http://47.240.0.229:3000/upload" name="file" :fileList.sync="fileList">-->
+            <!--<button>上传</button>-->
+            <!--<template slot="tips">-->
+                <!--<div>只能上传300kb以内的文件</div>-->
+            <!--</template>-->
+        <!--</c-uploader>-->
+
+        <!--<c-input value="中文"></c-input>-->
+        <!--<c-input value="中文" disabled></c-input>-->
+        <!--<c-input value="中文" readonly></c-input>-->
+
+        <c-datepicker></c-datepicker>
     </div>
 </template>
 
 <script>
   import CIcon from './components/c-icon'
+  import CInput from './components/c-input'
   import CCascader from './components/c-cascader'
   import db from '../tests/fixtrues/region'
 
@@ -168,6 +183,9 @@
   import CPopover from './components/c-popover'
   // import toastPlugin from './components/toast/toastPlugin'
   // Vue.use(toastPlugin)
+
+  import CUploader from './components/c-uploader'
+  import datepicker from './components/datepicker/c-datepicker'
 
 
   var source = [
@@ -237,6 +255,7 @@
     name: "demo",
     components: {
       'c-icon': CIcon,
+      'c-input':CInput,
       'c-cascader': CCascader,
       'c-slides': CSlides,
       'c-slides-item': CSlidesItem,
@@ -251,6 +270,8 @@
       'c-tabs-nav-item':TabsNavItem,
       'c-tabs-content':TabsContent,
       'c-tabs-content-item':TabsContentItem,
+      'c-uploader':CUploader,
+      'c-datepicker':datepicker
     },
     data() {
       return {
@@ -286,6 +307,7 @@
         currentPage:1,
         totalPage:10,
         selectedTab:'tab1',//tabs
+        fileList:[]
       }
     },
     created() {
