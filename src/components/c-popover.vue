@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" ref="wrapper">
-        <div class="pop-wrapper" :class="[`position-${this.position}`]" ref="popWrapper" v-if="showPop">
+        <div class="pop-wrapper" :class="[`position-${this.position}`,this.popClassName]" ref="popWrapper" v-if="showPop">
             <slot name="pop" :close="close"></slot>
         </div>
         <span ref="triggerWrap" class="btn">
@@ -46,6 +46,12 @@
         validator(value) {
           return ['click', 'hover'].indexOf(value) > -1
         }
+      },
+      popClassName:{
+        type:String
+      },
+      container:{
+        type:Element
       }
     },
     methods: {
@@ -77,8 +83,13 @@
         document.addEventListener('click', this.hiddenPop)
 
         this.$nextTick(() => {
-          document.body.appendChild(this.$refs.popWrapper)
-          //将弹出层放在body中，以防用户在组件外使用overflow：hidden时弹出层被遮盖
+          if (this.container){
+            this.container.appendChild(this.$refs.popWrapper)
+          } else{
+            document.body.appendChild(this.$refs.popWrapper)
+            //将弹出层放在body中，以防用户在组件外使用overflow：hidden时弹出层被遮盖
+          }
+
 
           let { width, height, top, left } = this.$refs.triggerWrap.getBoundingClientRect()
           let popHeight = this.$refs.popWrapper.getBoundingClientRect().height
