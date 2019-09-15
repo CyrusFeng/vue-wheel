@@ -157,7 +157,7 @@
         <!--<c-input value="中文" disabled></c-input>-->
         <!--<c-input value="中文" readonly></c-input>-->
 
-        <c-datepicker></c-datepicker>
+        <c-datepicker @update:value="value=$event" :value="value"></c-datepicker>
     </div>
 </template>
 
@@ -307,7 +307,8 @@
         currentPage:1,
         totalPage:10,
         selectedTab:'tab1',//tabs
-        fileList:[]
+        fileList:[],
+        value:new Date()
       }
     },
     created() {

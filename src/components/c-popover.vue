@@ -48,7 +48,7 @@
         }
       },
       popClassName:{
-        type:String
+        type:Array
       },
       container:{
         type:Element
@@ -67,6 +67,7 @@
       hiddenPop(e) {
         console.log(this.$refs.triggerWrap.contains(e.target))
         console.log(this.$refs.popWrapper.contains(e.target))
+        console.log(e.target)
         if (this.$refs.triggerWrap.contains(e.target) || this.$refs.popWrapper.contains(e.target)) {
           console.log('什么都不做')
         } else {

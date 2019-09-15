@@ -14,6 +14,13 @@ export default {
       array.push(i)
     }
     return array
+  },
+  addMonth(date,n){
+    let [year,month,day] = getYearMonthDay(date)
+    let newMonth = month + n
+    let copy = new Date(date)
+    copy.setMonth(newMonth)
+    return copy
   }
 }
 
