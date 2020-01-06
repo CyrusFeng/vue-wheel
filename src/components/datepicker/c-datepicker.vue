@@ -6,13 +6,13 @@
             <template slot="pop">
                 <div class="wheel-date-picker-nav">
                     <div class="wheel-choose-year wheel-header" v-show="showYear">
-                        <span><<</span>
+                        <span @click="onClickPrevTenYear"><<</span>
                         <div class="middle">
-                            <span>2019</span>
+                            <span>{{yearAreaBase}}</span>
                             <span>-</span>
-                            <span>2029</span>
+                            <span>{{yearAreaBase+9}}</span>
                         </div>
-                        <span>>></span>
+                        <span @click="onClickNextTenYear">>></span>
                     </div>
                     <div class="wheel-choose-month wheel-header" v-show="showMonth">
                         <span><<</span>
@@ -129,8 +129,8 @@
 </template>
 
 <script>
-  import Input from '../c-input'
-  import Popover from '../c-popover'
+  import Input from '../input/c-input'
+  import Popover from '../popover/c-popover'
   import auxiliary from './auxiliary'
 
   export default {
@@ -275,6 +275,12 @@
       onClickNextYear() {
         this.showDate.year += 1
       },
+      onClickPrevTenYear(){
+        this.yearAreaBase -= 10
+      },
+      onClickNextTenYear(){
+        this.yearAreaBase += 10
+      },
       setYear(n) {
         // this.value.setFullYear(n)
 
@@ -337,6 +343,12 @@
         }
         &-content {
             max-width: 182px;
+            min-width: 182px;
+            height: 182px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
             .row {
                 span {
                     display: inline-flex;
@@ -395,6 +407,32 @@
                     }
                 }
             }
+            &.month-list{
+                .row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span {
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 50px;
+                        height: 24px;
+                        cursor: pointer;
+                        background: #fff;
+                        transition: all .2s linear;
+                        font-size: 14px;
+                        border-radius: 2px;
+                        color: rgba(0, 0, 0, .65);
+                        &.selected {
+                            background-color: #dff2f2
+                        }
+                        &.sub {
+                            color: rgba(0, 0, 0, .25);
+                        }
+                    }
+                }
+            }
         }
         &-nav {
             /*display: inline-flex;*/
@@ -410,9 +448,11 @@
     }
 
     .wheel-header {
+        padding: 0 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height: 26px;
         .middle {
             display: inline-flex;
             justify-content: center;

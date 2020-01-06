@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "g-tabs-content"
+    name: "c-tabs-content"
   }
 </script>
 

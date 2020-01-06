@@ -16,19 +16,19 @@
             </ul>
         </div>
         <div class="right" v-if="selectedData[level] && selectedData[level].children">
-            <g-cascader-item :load-data="loadData"
+            <c-cascader-item :load-data="loadData"
                              :level="level+1"
                              :source="selectedData[level].children"
                              :selected-data="selectedData"
-                             @update:selectedData="transmit"></g-cascader-item>
+                             @update:selectedData="transmit"></c-cascader-item>
         </div>
     </div>
 </template>
 
 <script>
-    import CIcon from './c-icon'
+    import CIcon from '../icon/c-icon'
   export default {
-    name: "g-cascader-item",
+    name: "c-cascader-item",
     components:{
       'c-icon':CIcon
     },
@@ -90,7 +90,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../style_var.scss";
+    @import "../../style_var";
 
     .item-wrap{
     display: flex;

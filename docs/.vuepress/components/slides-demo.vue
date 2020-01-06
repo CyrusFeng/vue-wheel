@@ -23,9 +23,9 @@
 </template>
 
 <script>
-  import CIcon from '../../../src/components/c-icon'
-  import CSlides from '../../../src/components/c-slides'
-  import CSlidesItem from '../../../src/components/c-slides-item'
+  import CIcon from '../../../src/components/icon/c-icon'
+  import CSlides from '../../../src/components/slide/c-slides'
+  import CSlidesItem from '../../../src/components/slide/c-slides-item'
   export default {
     name: "slides-demo",
     components: {

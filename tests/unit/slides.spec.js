@@ -2,8 +2,8 @@ import chai from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import { shallowMount,mount } from '@vue/test-utils'
-import Slides from '../../src/components/c-slides'
-import CSlidesItem from '../../src/components/c-slides-item'
+import Slides from '../../src/components/slide/c-slides'
+import CSlidesItem from '../../src/components/slide/c-slides-item'
 
 let expect = chai.expect
 chai.use(sinonChai)

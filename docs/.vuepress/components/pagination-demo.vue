@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import CPagination from '../../../src/components/pagination'
+  import CPagination from '../../../src/components/pagination/c-pagination'
 
 
   export default {

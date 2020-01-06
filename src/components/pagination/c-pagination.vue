@@ -22,7 +22,7 @@
     </div>
 </template>
 <style scoped lang="scss">
-    @import "../style_var";
+    @import "../../style_var";
     .gulu-pager { display: flex; justify-content: flex-start; align-items: center; user-select: none;
         $width: 20px; $height: 20px; $font-size: 12px;
         &.hide { display: none; }
@@ -50,9 +50,9 @@
 </style>
 
 <script>
-  import CIcon from './c-icon'
+  import CIcon from '../icon/c-icon'
   export default {
-    name: "GuluPager",
+    name: "c-pagination",
     components: {'c-icon':CIcon},
     props: {
       totalPage: {

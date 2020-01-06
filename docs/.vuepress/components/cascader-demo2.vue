@@ -18,8 +18,8 @@
 </template>
 
 <script>
-  import CIcon from '../../../src/components/c-icon'
-  import CCascader from '../../../src/components/c-cascader'
+  import CIcon from '../../../src/components/icon/c-icon'
+  import CCascader from '../../../src/components/cascader/c-cascader'
   import db from '../../../tests/fixtrues/region'
 
   var source = [

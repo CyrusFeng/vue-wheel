@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  import CPopover from '../../../src/components/c-popover'
+  import CPopover from '../../../src/components/popover/c-popover'
   export default {
     name: "popover-demo",
     components: {

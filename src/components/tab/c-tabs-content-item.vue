@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "g-tabs-content-item",
+    name: "c-tabs-content-item",
     inject: ['eventBus'],
     data() {
       return {

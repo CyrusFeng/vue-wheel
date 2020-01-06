@@ -36,9 +36,9 @@
 </template>
 
 <script>
-  import CNav from '../../../src/components/nav/nav'
-  import CNavItem from '../../../src/components/nav/nav-item'
-  import CSubNav from '../../../src/components/nav/sub-nav'
+  import CNav from '../../../src/components/nav/c-nav'
+  import CNavItem from '../../../src/components/nav/c-nav-item'
+  import CSubNav from '../../../src/components/nav/c-sub-nav'
   export default {
     name: "nav-demo",
     components: {

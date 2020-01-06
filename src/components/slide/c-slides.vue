@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import CIcon from './c-icon'
+  import CIcon from '../icon/c-icon'
 
   export default {
     name: "g-slides",
@@ -226,7 +226,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../style_var.scss";
+    @import "../../style_var";
     .c-slides {
         margin: 40px;
         display: block;

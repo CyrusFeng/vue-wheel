@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: "g-popover",
+    name: "c-popover",
     mounted(){
       console.log(this.eventType)
       if (this.eventType === 'click'){

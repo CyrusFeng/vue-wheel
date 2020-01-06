@@ -8,7 +8,7 @@
   import Vue from 'vue'
 
   export default {
-    name: "g-tabs",
+    name: "c-tabs",
     data() {
       return {
         eventBus: new Vue()

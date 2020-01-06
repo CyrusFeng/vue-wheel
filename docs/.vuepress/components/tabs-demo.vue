@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import CIcon from '../../../src/components/c-icon'
+  import CIcon from '../../../src/components/icon/c-icon'
   import Tabs from '../../../src/components/tab/c-tabs'
   import TabsNav from '../../../src/components/tab/c-tabs-nav'
   import TabsNavItem from '../../../src/components/tab/c-tabs-nav-item'

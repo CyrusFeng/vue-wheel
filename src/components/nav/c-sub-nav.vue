@@ -24,10 +24,10 @@
 <script>
   import ClickOutside from '../../click-outside'
   import {removeListener} from '../../click-outside'
-  import CIcon from '../c-icon'
+  import CIcon from '../icon/c-icon'
 
   export default {
-    name: "sub-nav",
+    name: "c-sub-nav",
     inject: ['root', 'vertical'],
     directives: {
       ClickOutside

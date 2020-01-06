@@ -6,7 +6,8 @@
 </template>
 
 <script>
-  import '../svgALi'
+  // import '../../svgALi'
+  import '../../aaaaaa'
   // import '../icons/svg';
   export default {
     name: "c-icon",

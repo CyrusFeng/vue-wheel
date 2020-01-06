@@ -6,16 +6,17 @@
                @focus="$emit('focus', $event.target.value)"
                @blur="$emit('blur', $event.target.value)"
         >
+        <!--<Icon name="cancel" class="icon-error"></Icon>-->
         <template v-if="error">
-            <icon name="error" class="icon-error"></icon>
+            <!--<Icon name="error" class="icon-error"></Icon>-->
             <span class="errorMessage">{{error}}</span>
         </template>
     </div>
 </template>
 
 <script>
-  import Icon from './icon'
-
+  import Icon from '../icon'
+console.log(Icon)
   export default {
     components: { Icon },
     name: 'CInput',
@@ -39,7 +40,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../style_var.scss";
+    @import "../../style_var";
 
     .wrapper {
         font-size: $font-size;

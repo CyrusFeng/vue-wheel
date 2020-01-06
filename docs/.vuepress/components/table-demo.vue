@@ -26,8 +26,8 @@
 </template>
 
 <script>
-  import CIcon from '../../../src/components/c-icon'
-  import CTable from '../../../src/components/c-table'
+  import CIcon from '../../../src/components/icon/c-icon'
+  import CTable from '../../../src/components/table/c-table'
   export default {
     name: "table-demo",
     components: {

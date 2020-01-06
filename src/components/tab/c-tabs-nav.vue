@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: "g-tab-nav",
+    name: "c-tabs-nav",
     inject:['eventBus'],
     mounted(){
       this.eventBus.$on('changeTab',(val,vm)=>{

@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: "nav",
+    name: "c-nav",
     provide(){
       return {
         root:this,

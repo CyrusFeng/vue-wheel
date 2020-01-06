@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "nav-item",
+    name: "c-nav-item",
     inject:['root','vertical'],
     props:{
       name:{

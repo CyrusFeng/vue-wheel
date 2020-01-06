@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import CIcon from './c-icon'
+  import CIcon from '../icon/c-icon'
 
   export default {
     name: "c-table",
@@ -258,7 +258,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../style_var';
+    @import '../../style_var';
 
     $darkgrey: darken($grey, 10%);
     $lightgrey: lighten($grey, 10%);
@@ -268,6 +268,7 @@
         overflow: auto;
     }
     .table-wrap {
+        display: inline-block !important;
         overflow: auto;
         table {
             /*width: 100%;*/
@@ -278,7 +279,7 @@
             /*border-spacing: 0;*/
             overflow: auto;
             background: #fff;
-            width: 100%;
+            /*width: 100%;*/
             td, th {
                 padding: 8px;
                 text-align: left;
@@ -403,7 +404,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        /*width: 100%;*/
     }
     .loading-wrap {
         position: absolute;

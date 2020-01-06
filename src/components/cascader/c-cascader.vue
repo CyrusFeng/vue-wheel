@@ -7,11 +7,11 @@
             <c-icon class="icon" name="cancel" @click="cancel" v-if="result"></c-icon>
         </div>
         <div class="popover" v-if="popoverVisible">
-            <g-cascader-item :load-data="loadData"
+            <c-cascader-item :load-data="loadData"
                              :source="completeSource"
                              :level="level"
                              :selected-data="selectedData"
-                             @update:selectedData="selectedData = $event"></g-cascader-item>
+                             @update:selectedData="selectedData = $event"></c-cascader-item>
         </div>
     </div>
 
@@ -19,14 +19,14 @@
 
 <script>
   import Item from './c-cascader-item'
-  import CIcon from './c-icon'
-  import ClickOutside from '../click-outside'
-  import {removeListener} from '../click-outside'
+  import CIcon from '../icon/c-icon'
+  import ClickOutside from '../../click-outside'
+  import {removeListener} from '../../click-outside'
 
   export default {
-    name: "g-cascader",
+    name: "c-cascader",
     components: {
-      "g-cascader-item": Item,
+      "c-cascader-item": Item,
       'c-icon':CIcon
     },
     directives:{
@@ -96,7 +96,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../style_var.scss";
+    @import "../../style_var";
 
     .cascader-wrap{
         display: inline-block;

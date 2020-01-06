@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "g-tab-nav-item",
+    name: "c-tabs-nav-item",
     inject: ['eventBus'],
     data() {
       return {
