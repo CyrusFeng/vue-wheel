@@ -44,8 +44,7 @@
         box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
         color: rgba(0, 0, 0, 0.65);
         background-color: #fff;
-
-
+        outline:none;
         &:hover,&:focus{
             text-decoration: none;
             color: #40a9ff;
