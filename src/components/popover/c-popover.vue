@@ -144,15 +144,26 @@
         /*bottom: 100%;*/
         /*left: 0;*/
         /*transform: translateY(-100%);*/
-        font-size: 16px;
-        border: 1px solid #333;
+        /*font-size: 16px;*/
+        /*border: 1px solid #333;*/
         border-radius: 4px;
-        -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
-        filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));
+        /*-webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0,.5));*/
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,.1));
         background: #fff;
         padding: .5em 1em;
         max-width: 20em;
         word-break: break-all;
+
+        /*background-color: #fff;*/
+        background-clip: padding-box;
+        /*border-radius: 4px;*/
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.65);
+
         &::after, &::before {
             content: '';
             display: block;
@@ -160,16 +171,17 @@
             height: 0;
             border: 10px solid transparent;
             position: absolute;
+            /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);*/
         }
         &.position-top {
             transform: translateY(-100%);
             margin-top: -10px;
             &::after, &::before {
-                left: 0;
+                left: 10px;
             }
             &::before {
                 border-bottom: none;
-                border-top-color: black;
+                /*border-top-color: black;*/
                 top: 100%;
             }
             &::after {
@@ -187,7 +199,7 @@
             &::before {
                 border-top: none;
 
-                border-bottom-color: black;
+                /*border-bottom-color: black;*/
                 bottom: 100%;
             }
             &::after {
@@ -205,7 +217,7 @@
                 top: 50%;
             }
             &::before {
-                border-left-color: black;
+                /*border-left-color: black;*/
                 border-right: none;
                 left: 100%;
             }
@@ -222,7 +234,7 @@
                 top: 50%;
             }
             &::before {
-                border-right-color: black;
+                /*border-right-color: black;*/
                 border-left: none;
                 right: 100%;
             }

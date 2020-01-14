@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <p>
-            <strong>前端排序预览：</strong>
+            <strong>服务端排序预览：</strong>
         </p>
         <div class="wrap">
             <c-table :columns.sync="columns"
@@ -70,7 +70,7 @@ data() {
           { id: 14, name: 'nrank', score: 77 },
         ],
         selectedTableItems: [],
-        isFrontendSort: true,
+        isFrontendSort: false,
         loading: false
       }
 }
@@ -108,7 +108,7 @@ methods:{
           { id: 14, name: 'nrank', score: 77 },
         ],
         selectedTableItems: [],
-        isFrontendSort: true,
+        isFrontendSort: false,
         loading: false
       }
     },
@@ -122,7 +122,7 @@ methods:{
         this.loading = true
         setTimeout(()=>{
             this.loading = false
-        },1800)
+        },1000)
       }
     }
   }

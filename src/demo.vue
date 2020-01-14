@@ -83,21 +83,22 @@
         <!--<c-nav-item name="other">其他</c-nav-item>-->
         <!--</c-nav>-->
 
-        <!--<c-table :columns="columns"-->
-        <!--:data-source.sync="dataSource"-->
-        <!--:selected-table-items.sync="selectedTableItems"-->
-        <!--:columns.sync="columns"-->
-        <!--@update:columns="order"-->
-        <!--:is-frontend-sort="isFrontendSort"-->
-        <!--:loading="loading"-->
-        <!--height="300">-->
-        <!--<template slot-scope="item">-->
-        <!--<a href="" @click="edit(item)">编辑</a>-->
-        <!--</template>-->
+        <!--<c-table-->
+                <!--:columns.sync="columns"-->
+                <!--:data-source.sync="dataSource"-->
+                <!--:selected-table-items.sync="selectedTableItems"-->
+                <!--@update:columns="order"-->
+                <!--:is-frontend-sort="isFrontendSort"-->
+                <!--:loading="loading"-->
+                <!--height="300">-->
+            <!--<template slot-scope="item">-->
+                <!--<a href="" @click="edit(item)">编辑</a>-->
+            <!--</template>-->
         <!--</c-table>-->
 
 
         <!--<c-pagination :totalPage="totalPage" :currentPage="currentPage" @update:currentPage="getCurrentPage"></c-pagination>-->
+        <c-pagination :totalPage="totalPage" :currentPage.sync="currentPage"></c-pagination>
 
 
         <!--<c-popover position="left" event-type="click">点击-->
@@ -105,30 +106,39 @@
         <!--</c-popover>-->
 
 
+        <!--<div style="margin: 150px">-->
         <!--<c-popover position="left" event-type="click">-->
-        <!--弹出-->
+        <!--<c-button>弹出</c-button>-->
         <!--<template slot="pop">-->
         <!--弹出内容-->
         <!--</template>-->
         <!--</c-popover>-->
+        <!--</div>-->
+        <!--<div style="margin: 150px">-->
         <!--<c-popover position="top" event-type="hover">-->
-        <!--弹出-->
+        <!--<c-button>弹出</c-button>-->
         <!--<template slot="pop">-->
         <!--弹出内容-->
         <!--</template>-->
         <!--</c-popover>-->
+        <!--</div>-->
+        <!--<div style="margin: 150px">-->
         <!--<c-popover position="right" event-type="click">-->
-        <!--弹出-->
+        <!--<c-button>弹出</c-button>-->
         <!--<template slot="pop">-->
         <!--弹出内容-->
         <!--</template>-->
         <!--</c-popover>-->
+        <!--</div>-->
+
+        <!--<div style="margin: 150px">-->
         <!--<c-popover position="bottom" event-type="hover">-->
-        <!--弹出-->
+        <!--<c-button>弹出</c-button>-->
         <!--<template slot="pop">-->
         <!--弹出内容-->
         <!--</template>-->
         <!--</c-popover>-->
+        <!--</div>-->
 
 
         <!--<div>-->
@@ -155,12 +165,23 @@
         <!--<button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</button>-->
         <!--</div>-->
 
-        <c-uploader action="http://127.0.0.1:3000" name="file" :fileList.sync="fileList">
-            <c-button name="upload"></c-button>
-            <!--<template slot="tips">-->
-                <!--<div>只能上传300kb以内的文件</div>-->
-            <!--</template>-->
-        </c-uploader>
+        <!--<c-uploader action="http://127.0.0.1:3000" name="file" :fileList.sync="fileList1" max-length="3">-->
+        <!--<c-button name="upload"></c-button>-->
+        <!--&lt;!&ndash;<c-icon name="cancel"></c-icon>&ndash;&gt;-->
+        <!--&lt;!&ndash;<template slot="tips">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>只能上传300kb以内的文件</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</template>&ndash;&gt;-->
+        <!--</c-uploader>-->
+        <!--<c-uploader action="http://127.0.0.1:3000"-->
+        <!--name="file"-->
+        <!--:fileList.sync="fileList"-->
+        <!--model="picture-card" max-length="3"></c-uploader>-->
+        <!--<c-uploader action="http://47.240.0.229:3000"-->
+        <!--name="file"-->
+        <!--:fileList.sync="fileList1"-->
+        <!--model="picture-card"></c-uploader>-->
+
+
         <!--<c-uploader action="http://47.240.0.229:3000/upload" name="file" :fileList.sync="fileList">-->
         <!--<button>上传</button>-->
         <!--<template slot="tips">-->
@@ -168,10 +189,10 @@
         <!--</template>-->
         <!--</c-uploader>-->
 
-        <!--<c-input value="中文"></c-input>-->
-        <!--<c-input value="中文" disabled></c-input>-->
-        <!--<c-input value="中文" readonly></c-input>-->
-        <!--<c-input value="中文" error="错误"></c-input>-->
+        <c-input value="中文"></c-input>
+        <c-input value="中文" disabled></c-input>
+        <c-input value="中文" readonly></c-input>
+        <c-input value="中文" error="错误"></c-input>
 
         <!--<c-datepicker @update:value="value=$event" :value="value"></c-datepicker>-->
 
@@ -334,6 +355,7 @@
         totalPage: 10,
         selectedTab: 'tab1',//tabs
         fileList: [],
+        fileList1: [],
         value: new Date(),
         val: 0,//rate组件
         options: [

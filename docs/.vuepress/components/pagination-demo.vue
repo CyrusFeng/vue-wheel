@@ -5,8 +5,7 @@
             <strong>预览：</strong>
         </p>
         <div class="wrap">
-            <c-pagination :totalPage="totalPage" :currentPage="currentPage"
-                          @update:currentPage="getCurrentPage"></c-pagination>
+            <c-pagination :totalPage="totalPage" :currentPage.sync="currentPage"></c-pagination>
         </div>
         <p>
             <strong>代码：</strong>
@@ -26,7 +25,7 @@
     },
     data() {
       return {
-        code: `<c-pagination :totalPage="totalPage" :currentPage="currentPage" @update:currentPage="getCurrentPage"></c-pagination>`,
+        code: `<c-pagination :totalPage="totalPage" :currentPage.sync="currentPage"></c-pagination>`,
         currentPage: 1,
         totalPage: 10,
       }

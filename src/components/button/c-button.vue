@@ -1,14 +1,21 @@
 <template>
     <button class="c-btn c-btn-default">
         <!--<i data-v-c91678b8="" class="anticon anticon-upload"></i>-->
-        <c-icon :name="name"></c-icon>
-        <span>upload</span>
+        <c-icon :name="name" v-if="name" class="icon"></c-icon>
+        <span>
+            <slot></slot>
+        </span>
     </button>
 </template>
 
 <script>
+  import CIcon from '../icon/c-icon'
+
   export default {
     name: "c-button",
+    components: {
+      'c-icon': CIcon,
+    },
     props: {
       name: {
         type: String
@@ -51,8 +58,11 @@
             background-color: #fff;
             border-color: #40a9ff;
         }
+        .icon{
+            margin-right: 8px;
+        }
         span{
-           margin-left: 8px;
+           /*margin-left: 8px;*/
         }
     }
 </style>

@@ -6,7 +6,7 @@
                 <tr>
                     <!--<th style="width:50px"></th>-->
                     <th style="width:50px"><input type="checkbox" @change="onChangeAllItems" ref="allChecked"
-                               :checked="areAllItemsSelected">
+                                                  :checked="areAllItemsSelected">
                     </th>
                     <th style="width:50px" v-if="numberVisible">#</th>
                     <th :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field">
@@ -24,10 +24,11 @@
                 <tbody>
                 <tr v-for="(item,index) in dataSource" :key="item.id">
                     <!--<th style="width:50px">-->
-                        <!--<c-icon class="expend-icon" name="right"></c-icon>-->
+                    <!--<c-icon class="expend-icon" name="right"></c-icon>-->
                     <!--</th>-->
                     <td style="width:50px"><input type="checkbox" @change="onChangeItem($event,item)"
-                               :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0"></td>
+                                                  :checked="selectedTableItems.filter((i)=>i.id===item.id).length>0">
+                    </td>
                     <td style="width:50px" v-if="numberVisible">{{index+1}}</td>
                     <template v-for="column in columns">
                         <td :style="{width:column.width+'px'}" :key="column.field">{{item[column.field]}}</td>
@@ -40,7 +41,7 @@
             </table>
         </div>
         <div class="loading-wrap" v-if="loading&&!isFrontendSort">
-            <c-icon name="loading" class="loading"></c-icon>
+            <c-icon name="loading" class="loading" width="30px" height="30px"></c-icon>
         </div>
     </div>
 </template>
@@ -100,8 +101,8 @@
     },
     data() {
       return {
-        table2:null,
-        onWindowResize:null
+        table2: null,
+        onWindowResize: null
       }
     },
     computed: {
@@ -142,6 +143,8 @@
         handler(newValue, oldValue) {
           if (this.isFrontendSort) {
             this.order(newValue)
+          }else{
+            this.backendOrder(newValue)
           }
         },
         immediate: true
@@ -150,12 +153,12 @@
     mounted() {
       this.table2 = this.$refs.table.cloneNode(false)
       this.table2.classList.add('table-copy')
-        let thead = this.$refs.table.children[0]
-      let {height} = thead.getBoundingClientRect()
-      this.$refs.tableWrap.style.marginTop = height +'px'
-      this.$refs.tableWrap.style.height = this.height - height +'px'
+      let thead = this.$refs.table.children[0]
+      let { height } = thead.getBoundingClientRect()
+      this.$refs.tableWrap.style.marginTop = height + 'px'
+      this.$refs.tableWrap.style.height = this.height - height + 'px'
       this.table2.appendChild(this.$refs.table.children[0])
-        console.log(this.table2)
+      console.log(this.table2)
       this.$refs.tableComponentWrap.appendChild(this.table2)
       // this.updateTheadThWidth()
       // this.onWindowResize = ()=>{
@@ -164,7 +167,7 @@
       // window.addEventListener('resize',this.onWindowResize)
       // console.log(this.$scopedSlots)
     },
-    beforeDestroy(){
+    beforeDestroy() {
       // window.removeEventListener('resize',this.onWindowResize)
       // this.table2.remove()
       // this.table2 = null
@@ -204,9 +207,9 @@
           }
         })
         this.$emit('update:columns', copy)
-        if (this.isFrontendSort) {
-          this.order(copy)
-        }
+        // if (this.isFrontendSort) {
+        //   this.order(copy)
+        // }
       },
       order(columns) {
         let copy = JSON.parse(JSON.stringify(this.dataSource))
@@ -217,6 +220,18 @@
         })
         this.$emit('update:dataSource', copy)
         // this.dataSource = this.dataSource.sort((a,b)=>a-b)
+      },
+      backendOrder(columns){
+        let paramList = []
+        columns.forEach((column) => {
+          if (column.openSort) {
+            let param = {}
+            param.field = column.field
+            param.sort = column.sort
+            paramList.push(param)
+          }
+        })
+        this.$emit('backendOrder',paramList)
       },
       sortByKey(array, key, order) {
         return array.sort((a, b) => {
@@ -262,11 +277,12 @@
 
     $darkgrey: darken($grey, 10%);
     $lightgrey: lighten($grey, 10%);
-    .table-component-wrap{
+    .table-component-wrap {
         margin: 0 20px;
         position: relative;
         overflow: auto;
     }
+
     .table-wrap {
         display: inline-block !important;
         overflow: auto;
@@ -336,6 +352,7 @@
 
         }
     }
+
     table {
         /*width: 100%;*/
         /*display: block;*/
@@ -400,16 +417,19 @@
         }
 
     }
+
     .table-copy {
         position: absolute;
         top: 0;
         left: 0;
         /*width: 100%;*/
     }
+
     .loading-wrap {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 11111;
         width: 100%;
         height: 100%;
         display: flex;
@@ -421,7 +441,8 @@
             @include spin;
         }
     }
-    .expend-icon{
+
+    .expend-icon {
         width: 10px;
         height: 10px;
     }

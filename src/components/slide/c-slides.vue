@@ -29,11 +29,12 @@
   import CIcon from '../icon/c-icon'
 
   export default {
-    name: "g-slides",
+    name: "c-slides",
     components: {
       'c-icon': CIcon
     },
     props: {
+      //被选中子元素的name（非props中的name）
       selected: {
         type: String
       },
@@ -42,7 +43,8 @@
         default: true
       },
       autoPlayDelay:{
-        type:Number
+        type:Number,
+        default:1500
       },
       reserve: {
         type: Boolean,
@@ -51,6 +53,7 @@
     },
     data() {
       return {
+        //子元素name值数组
         names: [],
         childrenLength: 0,
         perIndex: 0,
@@ -60,37 +63,41 @@
       }
     },
     computed: {
+      //获取被选中子元素的name在name数组中的index
       selectedIndex() {
         return this.names.indexOf(this.getSelected())
       },
+      //name为c-slides-item的子元素数组
       items(){
+        // vm.$options.name  获取实例中$option中的name值
         return this.$children.filter((vm)=>{return vm.$options.name==='c-slides-item'})
       }
+    },
+    watch: {
+      selected() {
+        console.log(this.perIndex)
+        console.log(this.selectedIndex)
+        //this.selectedIndex 这个计算属性依赖于this.getSelected()函数的返回值，
+        // 在watch监听到selected变化时，也就是说sendSelectedName发出的单项数据流就改变了selected后，
+        // 影响了this.getSelected()函数的返回值，所以计算属性this.selectedIndex此时也发生了变化
+        // perIndex和selectedIndex也就是上一个显示的子元素的index值和当前将要显示的子元素的index值
+        this.updateChildren()
+      },
     },
     mounted() {
 
       this.childrenLength = this.items.length
 
-
-      // this.items.forEach((vm) => {
-      //   vm.reserve = this.reserve
-      // })
+      //vm.name 获取实例props中的name值
       this.names = this.items.map((vm) => {
         return vm.name
       })
       this.updateChildren()
       this.triggerAutoPlay()
 
-
-      // let first = this.items[0]
-      // let second = this.items[1]
-      // first.visible = true
-      // setTimeout(() => {
-      //   first.visible = false
-      //   second.visible = true
-      // }, 1000)
     },
     methods: {
+      //获取被选择子元素的name值 （非props中的name属性）
       getSelected() {
         let first = this.items[0]
         return this.selected || first.name
@@ -110,6 +117,7 @@
           vm.reserve = reserve
           //当reserve被修改时，子组件依赖于reserve的状态还未更新 所以要在更新完后再改变被选择项（触发动画）
           this.$nextTick(() => {
+            //被选中的子元素的selected值会被修改成当前组件中更新的selected，在子组件中会判断子组件内部的selected值和name值是否相同，相同则显示这个子组件
             vm.selected = this.getSelected()
           })
         })
@@ -119,29 +127,6 @@
         if (this.timer) {
           return
         }
-        // let index = this.names.indexOf(this.getSelected())
-        // setInterval(()=>{
-        //   if(index===names.length-1){index=-1}
-        //   this.$emit('update:selected',names[index+1])
-        //   index++
-        // },1000)
-        // 正序
-        // let run = ()=>{
-        //   if(index===this.names.length-1){index=-1}
-        //   this.sendSelectedName(index+1)
-        //   // this.$emit('update:selected',this.names[index+1])
-        //   index++
-        //   this.timer = setTimeout(run,2000)
-        // }
-        // 倒序
-        // let run = () => {
-        //   index--
-        //   if (index === -1) {
-        //     index = this.names.length - 1
-        //   }
-        //   this.$emit('update:selected', this.names[index])
-        //   setTimeout(run, 1000)
-        // }
         let run = () => {
           let index = this.names.indexOf(this.getSelected())
           let newIndex = index + 1
@@ -151,6 +136,8 @@
         }
         this.timer = setTimeout(run, this.autoPlayDelay)
       },
+      //触发变化的函数，将被选的子组件name以单项数据流形式更新到当前组件的selected中，
+      // 当前组件通过watch监听selected的变化调用updateChildren更新视图
       sendSelectedName(index) {
         if (index === -1) {
           index = this.items.length - 1
@@ -158,10 +145,10 @@
         if (index === this.items.length) {
           index = 0
         }
+        //此时的selectedIndex是触发sendSelectedName前的index值 perIndex就代表'之前的index'
         this.perIndex = this.selectedIndex
+        //单项数据流 更新被选name 触发updateChildren
         this.$emit('update:selected', this.names[index])
-        // console.log('index', index)
-        // console.log('this.names[index]', this.names[index])
       },
       pause() {
         clearTimeout(this.timer)
@@ -209,19 +196,7 @@
         console.log('onTouchMove')
       }
     },
-    watch: {
-      selected() {
-        console.log(this.perIndex)
-        this.updateChildren()
-        console.log(this.selectedIndex)
 
-      },
-      // reserve(){
-      //   this.items.forEach((vm) => {
-      //     vm.reserve = this.reserve
-      //   })
-      // }
-    }
   }
 </script>
 

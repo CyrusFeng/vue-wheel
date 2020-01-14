@@ -8,7 +8,8 @@
 <script>
   // import '../../svgALi'
   import '../../aaaaaa'
-  // import '../icons/svg';
+  // import 'http://at.alicdn.com/t/font_987168_g21was43nsb.js'
+  // import '../../icons/index';
   export default {
     name: "c-icon",
     props: {
@@ -23,6 +24,9 @@
       },
       rotate:{
         type:Boolean
+      },
+      scriptUrl:{
+        type:String
       }
 
     }
@@ -38,7 +42,7 @@
         overflow: hidden;
     }
     .rotate{
-        animation: rotate 1.5s linear infinite;
+        animation: rotate 1s linear infinite;
     }
     @keyframes rotate{
         from{transform: rotate(0deg)}

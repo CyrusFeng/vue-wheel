@@ -18,6 +18,7 @@ module.exports = {
           '../components/cascader.md',
           '../components/tabs.md',
           '../components/toast.md',
+          '../components/upload.md',
         ]
       },
     ]
