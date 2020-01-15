@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h2>层层获取数据</h2>
+        <!--<h2>层层获取数据</h2>-->
         <p>
-            <strong>预览：</strong>
+            <strong>动态加载数据预览：</strong>
         </p>
         <div class="wrap">
             <div>

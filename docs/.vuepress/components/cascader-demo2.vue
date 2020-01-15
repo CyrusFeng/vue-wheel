@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h2>展示完整数据</h2>
+        <!--<h2>展示完整数据</h2>-->
         <p>
-            <strong>预览：</strong>
+            <strong>展示完整数据预览：</strong>
         </p>
         <div class="wrap">
             <div>
@@ -40,19 +40,19 @@
           name: '石家庄',
           children: [
             {
-              name: '石家庄1区',
+              name: '长安区',
               children: [
-                { name: '石家庄1区1' },
-                { name: '石家庄1区2' }
+                { name: '桃园镇' },
+                { name: '高营镇' }
               ]
             },
-            { name: '石家庄2区' },
-            { name: '石家庄3区' },
+            { name: '桥西区' },
+            { name: '新华区' },
             {
-              name: '石家庄4区',
+              name: '鹿泉区',
               children: [
-                { name: '石家庄4区1' },
-                { name: '石家庄4区2' }
+                { name: '获鹿镇' },
+                { name: '铜冶镇' }
               ]
             }
           ]
@@ -66,17 +66,17 @@
           name: '杭州',
           children: [
             {
-              name: '阿里',
+              name: '临安区',
               children: [
-                { name: '优酷' },
-                { name: '饿了么' }
+                { name: '高虹镇' },
+                { name: '天目山镇' }
               ]
             },
             {
-              name: '海康威视',
+              name: '上城区',
               children: [
-                { name: '摄像头' },
-                { name: '监控器' }
+                { name: '玉皇山' },
+                { name: '近江西园' }
               ]
             },
           ]
@@ -97,69 +97,70 @@
         completeSource: [],
         source,
         code: `<c-cascader :complete-source="source"></c-cascader>
-var source = [
-{
-  name: '北京',
-  children: [
-    { name: '东城' },
-    { name: '西城' },
-    { name: '朝阳' }
-  ]
-},
-{
-  name: '河北',
-  children: [
-    { name: '廊坊' },
-    { name: '保定' },
+  var source = [
     {
-      name: '石家庄',
+      name: '北京',
       children: [
+        { name: '东城' },
+        { name: '西城' },
+        { name: '朝阳' }
+      ]
+    },
+    {
+      name: '河北',
+      children: [
+        { name: '廊坊' },
+        { name: '保定' },
         {
-          name: '石家庄1区',
+          name: '石家庄',
           children: [
-            { name: '石家庄1区1' },
-            { name: '石家庄1区2' }
-          ]
-        },
-        { name: '石家庄2区' },
-        { name: '石家庄3区' },
-        {
-          name: '石家庄4区',
-          children: [
-            { name: '石家庄4区1' },
-            { name: '石家庄4区2' }
+            {
+              name: '长安区',
+              children: [
+                { name: '桃园镇' },
+                { name: '高营镇' }
+              ]
+            },
+            { name: '桥西区' },
+            { name: '新华区' },
+            {
+              name: '鹿泉区',
+              children: [
+                { name: '获鹿镇' },
+                { name: '铜冶镇' }
+              ]
+            }
           ]
         }
       ]
-    }
-  ]
-},
-{
-  name: '浙江',
-  children: [
+    },
     {
-      name: '杭州',
+      name: '浙江',
       children: [
         {
-          name: '阿里',
+          name: '杭州',
           children: [
-            { name: '优酷' },
-            { name: '饿了么' }
+            {
+              name: '临安区',
+              children: [
+                { name: '高虹镇' },
+                { name: '天目山镇' }
+              ]
+            },
+            {
+              name: '上城区',
+              children: [
+                { name: '玉皇山' },
+                { name: '近江西园' }
+              ]
+            },
           ]
         },
-        {
-          name: '海康威视',
-          children: [
-            { name: '摄像头' },
-            { name: '监控器' }
-          ]
-        },
+        { name: '金华' }
       ]
-    },
-    { name: '金华' }
+    }
   ]
-}
-]`
+`
       }
     }
   }

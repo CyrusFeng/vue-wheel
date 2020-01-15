@@ -1,14 +1,14 @@
 <template>
     <div class="container toast-demo">
         <div class="wrap">
-            <h2>支持设置关闭按钮和html</h2>
+            <!--<h2>支持设置关闭按钮和html</h2>-->
             <p>
                 <strong>预览：</strong>
             </p>
             <div>
-                <button @click="showToast('点击弹出提示','top')">上方弹出</button>
-                <button @click="showToast('点击弹出提示','middle')">中间弹出</button>
-                <button @click="showToast('点击弹出提示','bottom')">底部弹出</button>
+                <c-button @click.native="showToast('点击弹出提示','top')">上方弹出</c-button>
+                <c-button @click.native="showToast('点击弹出提示','middle')">中间弹出</c-button>
+                <c-button @click.native="showToast('点击弹出提示','bottom')">底部弹出</c-button>
             </div>
         </div>
         <p>
@@ -21,14 +21,19 @@
 <script>
   import Vue from 'vue'
   import toastPlugin from '../../../src/components/toast/toastPlugin'
+  import CButton from '../../../src/components/button/c-button'
+
   Vue.use(toastPlugin)
   export default {
     name: "toast-demo",
+    components:{
+      'c-button':CButton
+    },
     data() {
       return {
-        code:`<button @click="showToast('点击弹出提示','top')">上方弹出</button>
-<button @click="showToast('点击弹出提示','middle')">中间弹出</button>
-<button @click="showToast('点击弹出提示','bottom')">底部弹出</button>
+        code:`<c-button @click.native="showToast('点击弹出提示','top')">上方弹出</c-button>
+<c-button @click.native="showToast('点击弹出提示','middle')">中间弹出</c-button>
+<c-button @click.native="showToast('点击弹出提示','bottom')">底部弹出</c-button>
 methods:{
   showToast(text,position){
     this.$toast('<i style="font-weight: bold">'+text+'</i>',{

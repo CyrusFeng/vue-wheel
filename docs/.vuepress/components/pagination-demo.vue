@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>支持设置当前页、总页数、省略显示</h2>
+        <!--<h2>支持设置当前页、总页数、省略显示</h2>-->
         <p>
             <strong>预览：</strong>
         </p>
