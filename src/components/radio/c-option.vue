@@ -24,7 +24,7 @@
   }
 </script>
 <style scoped lang="scss">
-    $p:#36b1bf;
+    $p:#1890ff;
     .x-option {
         display: inline-flex;
         justify-content: flex-start;

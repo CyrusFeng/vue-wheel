@@ -342,14 +342,18 @@
 
         }
         &-content {
-            max-width: 182px;
-            min-width: 182px;
-            height: 182px;
+            /*max-width: 182px;*/
+            /*min-width: 182px;*/
+            /*height: 182px;*/
+            /*max-width: 200px;*/
+            /*min-width: 182px;*/
+            /*max-height: 200px;*/
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             .row {
+                font-size: 0;
                 span {
                     display: inline-flex;
                     justify-content: center;
@@ -359,6 +363,7 @@
                     color: rgba(0, 0, 0, 0.25);
                     transition: all .2s linear;
                     border-radius: 2px;
+                    font-size: 12px;
                     &.selected {
                         background: #dff2f2;
                     }

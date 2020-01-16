@@ -75,6 +75,7 @@ methods:{
     .container.toast-demo{
         /*font-size: 16px;*/
         .wrap{
+            margin-top: 20px;
             font-size: 16px;
         }
         pre{

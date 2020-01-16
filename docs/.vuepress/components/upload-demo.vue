@@ -5,7 +5,7 @@
             <strong>预览：</strong>
         </p>
         <div class="wrap">
-            <c-uploader action="http://47.240.0.229:3000" name="file" :fileList.sync="fileList" max-length="3">
+            <c-uploader action="http://vue.nobugman.com:3000" name="file" :fileList.sync="fileList" max-length="3">
                 <c-button name="upload">upload</c-button>
             </c-uploader>
         </div>

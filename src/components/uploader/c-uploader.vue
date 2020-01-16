@@ -98,7 +98,7 @@
         </ol>
         <div class="preview-wrap" v-show="previewVisible">
             <div class="img-wrap">
-                <img :src="url" alt="" ref="previewImg" @load="imgVisibel = true">
+                <img :src="url" alt="" ref="previewImg" @load="imgVisible = true">
                 <c-icon name="loading" width="30px" height="30px" :rotate="true" v-if="!imgVisible"></c-icon>
             </div>
             <c-icon class="remove" name="remove"

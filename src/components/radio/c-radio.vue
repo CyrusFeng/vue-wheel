@@ -1,6 +1,6 @@
 <template>
     <div class="x-radio" :class="{vertical}">
-        <x-option v-for="(option,index) in options" :key="option.value" :option="option" :index="index" :current.sync="current"></x-option>
+        <x-option v-for="(option,index) in options" :key="option.value" :option="option" :index="index" :current.sync="current" class="margin"></x-option>
     </div>
 </template>
 <script>
@@ -11,7 +11,7 @@
     props: {
       options: { type: Array, required: true },
       vertical: { type: Boolean, default: false },
-      defaultIndex: Number
+      defaultIndex: [Number,String]
     },
     data() {
       return {
@@ -38,6 +38,10 @@
         &.vertical {
             flex-direction: column;
             align-items: flex-start;
+            .margin{
+                /*margin-top: 5px;*/
+                margin-bottom: 5px;
+            }
         }
     }
 </style>
