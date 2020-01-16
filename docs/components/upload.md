@@ -3,6 +3,13 @@ sidebarDepth: 2
 ---
 # upload
 
+## github pages问题
+- 由于GitHub pages使用https协议，上传和预览接口目前都是http协议，所以没办法访问成功。下面是组件功能的一些截图
+![avatar](https://tva1.sinaimg.cn/large/006tNbRwly1gaytjxrh6hj31700iydh6.jpg)
+![avatar](https://tva1.sinaimg.cn/large/006tNbRwly1gaytimheutj31680imtam.jpg)
+![avatar](https://tva1.sinaimg.cn/large/006tNbRwly1gaytkonokcj30ns092mxa.jpg)
+![avatar](https://tva1.sinaimg.cn/large/006tNbRwly1gaytkxjkl0j30ng086q4d.jpg)
+
 ## 需求演示
 
 - 上传一个或一些文件
